@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVwPresentacionNinosTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+          <h:panelGrid columns="3" cellpadding="0">            
+            <h:form id="VwPresentacionNinosListForm">
+                 <br></br><br></br>
+                <p:panel header="Listado de Niños" style="width:560px;">
+                     <br></br>  
+                        <h:inputText id="documentoIdentidad" value="#{vwPresentacionNinosController.documento}" />
+                        <p:commandButton value="Buscar"  actionListener="#{vwPresentacionNinosController.obtener_lista_presentacion_ninos_buscar()}"
+                                       update="datalist">
+                             
+                        </p:commandButton>  
+                        <br></br><br></br>
+                     <p:dataTable id="datalist" value="#{vwPresentacionNinosController.lista_presentacion_ninos}" var="item"
+                                 selectionMode="single" selection="#{vwPresentacionNinosController.selected}"
+                                 paginator="true" style="width:540px;" paginatorPosition="bottom"
+                                 rowKey="#{item.idPersona}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_fechaRegistro}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaRegistro}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>                         
+                        <p:column filterBy="#{item.documentoIdentidad}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_documentoIdentidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.documentoIdentidad}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.nombre}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.apellidos}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_apellidos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_fechaNacimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaNacimiento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_fechaInicio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaInicio}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwPresentacionNinosTitle_descripcionEvento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcionEvento}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}"  oncomplete="PF('VwPresentacionNinosCreateDialog').show()"/>
+                    </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+            <p:spacer width="110" height="510"> </p:spacer>
+            <h:graphicImage  library="imagenes"  style="width: 600px; height: 400px;" name="chapinero2.png"/>                
+            </h:panelGrid>
+            <ui:include src="Create_nino.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

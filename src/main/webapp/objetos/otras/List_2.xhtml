@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+        
+     <ui:define name="title">
+        <h:outputText value="#{bundle.ListPersonaTitle}"></h:outputText>
+     </ui:define>
+
+        <ui:define name="body">
+          <h:panelGrid columns="5" cellpadding="0">
+            <h:form id="PersonaListForm">
+                <br></br>
+             <h:inputText id="documentoIdentidad" value="#{personaController.documentoIdentidad}" />
+             <p:commandButton value="Buscar" actionListener="#{personaController.obtener_lista_persona()}" >
+                 <f:ajax   render="objetoPersona" execute="@this objetoPersona"/>                    
+             </p:commandButton>
+             <br></br><br></br>
+               <p:panel style="width:650px;" header="Registro de Amigos">
+              <p:tabView id="objetoPersona" style="width:600px;">
+              
+                <p:tab title="Datos Personales" >  
+                    <p:panelGrid columns="4" >
+                        <h:outputText value="#{bundle.ViewPersonaLabel_fechaRegistro}"/>
+                        <h:outputText value="#{personaController.objeto_persona.fechaRegistro}" title="#{bundle.ViewPersonaTitle_fechaRegistro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>     
+                        <h:outputText value="Tipo Documento"/>
+                        <h:outputText value="#{personaController.objeto_persona.tipoDocumento}"/>                        
+                        <h:outputText value="#{bundle.ViewPersonaLabel_documentoIdentidad}"/>
+                        <h:outputText value="#{personaController.objeto_persona.documentoIdentidad}" title="#{bundle.ViewPersonaTitle_documentoIdentidad}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_nombre}"/>
+                        <h:outputText value="#{personaController.objeto_persona.nombre}" title="#{bundle.ViewPersonaTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_apellidos}"/>
+                        <h:outputText value="#{personaController.objeto_persona.apellidos}" title="#{bundle.ViewPersonaTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_sexo}"/>
+                        <h:outputText value="#{personaController.objeto_persona.sexo}" title="#{bundle.ViewPersonaTitle_sexo}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_direccion}"/>
+                        <h:outputText value="#{personaController.objeto_persona.direccion}" title="#{bundle.ViewPersonaTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_telefono}"/>
+                        <h:outputText value="#{personaController.objeto_persona.telefono}" title="#{bundle.ViewPersonaTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_numeroCelular}"/>
+                        <h:outputText value="#{personaController.objeto_persona.numeroCelular}" title="#{bundle.ViewPersonaTitle_numeroCelular}"/>
+                        <h:outputText value="Correo electronico"/>
+                        <h:outputText value="#{personaController.objeto_persona.correo}" title="Correo electronico" />                   
+                        <h:outputText value="#{bundle.ViewPersonaLabel_estadoCivil}"/>
+                        <h:outputText value="#{personaController.objeto_persona.estadoCivil}" title="#{bundle.ViewPersonaTitle_estadoCivil}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{personaController.objeto_persona.fechaNacimiento}" title="#{bundle.ViewPersonaTitle_fechaNacimiento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>   
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idRol}" />
+                        <h:outputText value="#{personaController.objeto_persona.idRol.nombreRol}"/>
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idBarrio}"  />
+                        <h:outputText value="#{personaController.objeto_persona.idBarrio.nombreBarrio}"/>
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idLugarNacimiento}"  />
+                        <h:outputText value="#{personaController.objeto_persona.idLugarNacimiento.nombreCiudad}"/>                        
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idOcupacion}"  />
+                        <h:outputText value="#{personaController.objeto_persona.idOcupacion.nombreOcupacion}"/>   
+                        <h:outputText value="Nivel de estudios "  />    
+                        <h:outputText value="#{personaController.objeto_persona.nivelEstudio}"/>
+                        <h:outputText value="Numero de hijos"  />
+                        <h:outputText value="#{personaController.objeto_persona.numeroHijos}"/>
+                                       
+                    </p:panelGrid>
+ 
+                     </p:tab>
+                      <p:tab title="Anotaciones"> 
+                        <p:panelGrid columns="4" >
+                        <h:outputText value="Influencia o trasfondo religioso" />
+                        <h:outputText value="#{personaController.objeto_persona.trasfondoReligioso}"/>
+                        <h:outputText value="Cómo conocio la iglesia" />
+                        <h:outputText value="#{personaController.objeto_persona.comoLlegoIglesia}"/>
+                        <h:outputText value="Visita primera vez" />
+                        <p:selectBooleanCheckbox  disabled="true" id="primeraVisita" value="#{personaController.objeto_persona.primeraVisita}" />                  
+                        <h:outputText value="Tiempo de asistencia" />
+                        <h:outputText value="#{personaController.objeto_persona.tiempoDeVisitar}"/>
+                        <h:outputText value="Participo en discipulado" />
+                        <p:selectBooleanCheckbox disabled="true" id="participoDiscipulado" value="#{personaController.objeto_persona.participoDiscipulado}" />
+
+                        <h:outputText value="Lugar de discipulado"  />
+                        <h:outputText value="#{personaController.objeto_persona.lugarDiscipulado}"/>
+
+                        <h:outputText value="Desea discipulado"  />
+                        <p:selectBooleanCheckbox disabled="true" id="deseaDiscipulado" value="#{personaController.objeto_persona.deseaDiscipulado}" />
+
+                        <h:outputText value="Razones de asistencia"  />
+                        <h:outputText value="#{personaController.objeto_persona.razonesAsistencia}"/>
+
+                        <h:outputText value="Luchas espirituales" />
+                        <h:outputText value="#{personaController.objeto_persona.luchasEspirituales}"/>                           
+
+                        <p:outputLabel value="Desea recibir informacion"  />
+                        <p:selectBooleanCheckbox disabled="true" id="recibirInformacion" value="#{personaController.objeto_persona.recibirInformacion}" />                        
+                        <h:outputText value="Contacto Personal"  />
+                        <h:outputText value="#{personaController.objeto_persona.contactovisita}"/>                        
+                        </p:panelGrid>                      
+                      </p:tab>                  
+ 
+                  
+              </p:tabView>
+                   <f:facet name="footer">
+                       <p:commandButton id="createButton" icon="ui-icon-plus" resetValues="true" value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" oncomplete="PF('PersonaCreateDialog').show()"/>
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" />
+                <p:commandButton id="deleteButton" onclick="return confirm('Esta seguro de eliminar este registro ?')" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{personaController.destroy}" update=":growl"/>
+              </f:facet>  
+             </p:panel>
+            </h:form>
+	    <p:spacer width="10" height="10"> </p:spacer>
+            <h:graphicImage  library="imagenes"  style="width: 600px; height: 400px;" name="chapinero2.png"/> 
+            </h:panelGrid>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>            
+        </ui:define>
+    </ui:composition>
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClaseCuentaCreateDlg" widgetVar="ClaseCuentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClaseCuentaTitle}">
+            <h:form id="ClaseCuentaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{claseCuentaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateClaseCuentaLabel_idClaseCuenta}" for="idClaseCuenta" />
+                        <p:inputText id="idClaseCuenta" value="#{claseCuentaController.selected.idClaseCuenta}" title="#{bundle.CreateClaseCuentaTitle_idClaseCuenta}" required="true" requiredMessage="#{bundle.CreateClaseCuentaRequiredMessage_idClaseCuenta}"/>
+                        <p:outputLabel value="#{bundle.CreateClaseCuentaLabel_nombreClaseCuenta}" for="nombreClaseCuenta" />
+                        <p:inputText id="nombreClaseCuenta" value="#{claseCuentaController.selected.nombreClaseCuenta}" title="#{bundle.CreateClaseCuentaTitle_nombreClaseCuenta}" required="true" requiredMessage="#{bundle.CreateClaseCuentaRequiredMessage_nombreClaseCuenta}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{claseCuentaController.create}" value="#{bundle.Save}" update="display,:ClaseCuentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClaseCuentaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ClaseCuentaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

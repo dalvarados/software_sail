@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCargoComiteCreateDlg" widgetVar="PersonaCargoComiteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaCargoComiteTitle}">
+            <h:form id="PersonaCargoComiteCreateForm">
+                <h:panelGroup id="display">
+                     <p:panelGrid columns="5" rendered="#{personaCargoComiteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonaCargoComiteLabel_idComite}" for="idComite" />
+                        <p:selectOneMenu id="idComite" value="#{personaCargoComiteController.selected.idComite}" >
+                            <f:selectItems value="#{comiteController.itemsAvailableSelectOne}" 
+                                           var="idComiteItem"
+                                           itemValue="#{idComiteItem}" itemLabel="#{idComiteItem.nombreComite}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Vigencia" />
+                        <p:selectOneMenu id="vigencia" value="#{personaCargoComiteController.selected.fecha}" >
+                            <f:selectItem itemLabel="2017" itemValue="2017" />                            
+                            <f:selectItem itemLabel="2018" itemValue="2018" />                            
+                            <f:selectItem itemLabel="2019" itemValue="2019" />
+                            <f:selectItem itemLabel="2020" itemValue="2020" />                            
+                            <f:selectItem itemLabel="2021" itemValue="2021" />                            
+                            <f:selectItem itemLabel="2022" itemValue="2022" />
+                            <f:selectItem itemLabel="2023" itemValue="2023" />                            
+                            <f:selectItem itemLabel="2024" itemValue="2024" />                            
+                            <f:selectItem itemLabel="2025" itemValue="2025" />
+                            <f:selectItem itemLabel="2026" itemValue="2026" />                            
+                            <f:selectItem itemLabel="2027" itemValue="2027" />                            
+                            <f:selectItem itemLabel="2028" itemValue="2028" />                            
+                            <f:selectItem itemLabel="2029" itemValue="2029" />                            
+                            <f:selectItem itemLabel="2030" itemValue="2030" />
+                            <f:selectItem itemLabel="2031" itemValue="2031" />
+                            <f:selectItem itemLabel="2032" itemValue="2032" />
+                            <f:selectItem itemLabel="2033" itemValue="2033" />
+                            <f:selectItem itemLabel="2034" itemValue="2034" />
+                            <f:selectItem itemLabel="2035" itemValue="2035" />                            
+                        </p:selectOneMenu>                         
+                        
+                        <p:commandButton  id="buscar" actionListener="#{personaCargoComiteController.getList_rep_asistencia_comite()}" value="Buscar"  >
+                            <f:ajax    render="datalistCreate"   execute="@this datalistCreate" />
+                        </p:commandButton>                         
+                    </p:panelGrid>                     
+                    <p:spacer height="30"/>
+                    
+                    <p:panelGrid columns="5" rendered="#{personaCargoComiteController.selected != null}">
+                       <p:outputLabel value="#{bundle.CreatePersonaCargoComiteLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{personaCargoComiteController.selected.idPersona}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}" itemLabel="#{idPersonaItem.nombre.concat(' ').concat(idPersonaItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaCargoComiteLabel_idCargo}" for="idCargo" />
+                        <p:selectOneMenu id="idCargo" value="#{personaCargoComiteController.selected.idCargo}" >
+                            <f:selectItems value="#{cargoController.itemsAvailableSelectOne}"
+                                           var="idCargoItem"
+                                           itemValue="#{idCargoItem}" itemLabel="#{idCargoItem.nombreCargo}"/>
+                        </p:selectOneMenu> 
+                        <p:commandButton actionListener="#{personaCargoComiteController.create}" value="Agregar" update="display,:PersonaCargoComiteListForm:datalist datalistCreate,:growl" >
+                         <f:ajax    render="datalistCreate"   execute="@this datalistCreate" />
+                        </p:commandButton>
+                    </p:panelGrid>
+                    <p:spacer height="30"/>
+                    
+                    <p:panelGrid columns="2" >
+                        <p:dataTable id="datalistCreate" value="#{personaCargoComiteController.list_persona_comite}" var="item2"
+                                     selectionMode="single"  style="width: 800px"
+                                     paginator="false"  scrollable="true" scrollHeight="200"
+                                 rowKey="#{item2.idPersonaCargoComite}"
+                                 rows="100"
+                                 >
+                        <p:column style="width: 250px">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaCargoComiteTitle_idPersona}"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.idPersona.nombre.concat(' ').concat(item2.idPersona.apellidos)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaCargoComiteTitle_idComite}"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.idComite.nombreComite}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaCargoComiteTitle_idCargo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.idCargo.nombreCargo}"/>
+                        </p:column>
+                    </p:dataTable>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

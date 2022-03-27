@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentasPucViewDlg" widgetVar="CuentasPucViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCuentasPucTitle}">
+            <h:form id="CuentasPucViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuentasPucController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCuentasPucLabel_codigoCuenta}"/>
+                        <h:outputText value="#{cuentasPucController.selected.codigoCuenta}" title="#{bundle.ViewCuentasPucTitle_codigoCuenta}"/>
+                        <h:outputText value="#{bundle.ViewCuentasPucLabel_nombre}"/>
+                        <h:outputText value="#{cuentasPucController.selected.nombre}" title="#{bundle.ViewCuentasPucTitle_nombre}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" update="display,:CuentasPucListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CuentasPucViewDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

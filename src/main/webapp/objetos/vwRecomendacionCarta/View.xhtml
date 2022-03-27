@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwRecomendacionCartaViewDlg" widgetVar="VwRecomendacionCartaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVwRecomendacionCartaTitle}">
+            <h:form id="VwRecomendacionCartaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwRecomendacionCartaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_idPersona}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.idPersona}" title="#{bundle.ViewVwRecomendacionCartaTitle_idPersona}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_dia}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.dia}" title="#{bundle.ViewVwRecomendacionCartaTitle_dia}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_mes}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.mes}" title="#{bundle.ViewVwRecomendacionCartaTitle_mes}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_anio}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.anio}" title="#{bundle.ViewVwRecomendacionCartaTitle_anio}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_tipoDocumento}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.tipoDocumento}" title="#{bundle.ViewVwRecomendacionCartaTitle_tipoDocumento}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_documentoIdentidad}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.documentoIdentidad}" title="#{bundle.ViewVwRecomendacionCartaTitle_documentoIdentidad}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_nombre}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.nombre}" title="#{bundle.ViewVwRecomendacionCartaTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_nombreIglesia}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.nombreIglesia}" title="#{bundle.ViewVwRecomendacionCartaTitle_nombreIglesia}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_direccion}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.direccion}" title="#{bundle.ViewVwRecomendacionCartaTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_telefono}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.telefono}" title="#{bundle.ViewVwRecomendacionCartaTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_pastor}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.pastor}" title="#{bundle.ViewVwRecomendacionCartaTitle_pastor}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_identificacionPastor}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.identificacionPastor}" title="#{bundle.ViewVwRecomendacionCartaTitle_identificacionPastor}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_nombreCiudad}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.nombreCiudad}" title="#{bundle.ViewVwRecomendacionCartaTitle_nombreCiudad}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_nombreDepartamento}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.nombreDepartamento}" title="#{bundle.ViewVwRecomendacionCartaTitle_nombreDepartamento}"/>
+                        <h:outputText value="#{bundle.ViewVwRecomendacionCartaLabel_nombrePais}"/>
+                        <h:outputText value="#{vwRecomendacionCartaController.selected.nombrePais}" title="#{bundle.ViewVwRecomendacionCartaTitle_nombrePais}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VwRecomendacionCartaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

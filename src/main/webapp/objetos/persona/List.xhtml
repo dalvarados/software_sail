@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+        
+     <ui:define name="title">
+        <h:outputText value="#{bundle.ListPersonaTitle}"></h:outputText>
+     </ui:define>
+
+        <ui:define name="body">
+          <h:panelGrid columns="6" cellpadding="0">
+            <h:form id="PersonaListForm">
+             <br></br><br></br>
+               <p:panel style="width:650px;" header="Registro de Amigos">
+                   <p:dataTable id="datalist" value="#{personaController.list_vista_ordenada}" var="item"
+                                 selectionMode="single" 
+                                 paginator="true" paginatorPosition="bottom"
+                                 rowKey="#{item.idPersona}" selection="#{personaController.selected}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="fechaRegistro"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaRegistro}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column filterBy="#{item.nombre}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.apellidos}"  filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Apellidos"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Telefono"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefono}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Celular"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numeroCelular}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Discipulado"/>
+                            </f:facet>                       
+                            <p:selectBooleanCheckbox value="#{item.deseaDiscipulado}" disabled="true"/>                            
+                        </p:column>
+            </p:dataTable>
+              <f:facet name="footer">
+                <p:commandButton id="createButton" icon="ui-icon-plus" resetValues="true" value="#{bundle.Create}" actionListener="#{personaController.prepareCreate}" oncomplete="PF('PersonaCreateDialog').show()"/>
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PersonaEditForm" oncomplete="PF('PersonaEditDialog').show()" />
+                <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PersonaViewForm" oncomplete="PF('PersonaViewDialog').show()"/>
+                <p:commandButton id="deleteButton" onclick="return confirm('Esta seguro de eliminar este registro ?')" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{personaController.destroy}" update=":growl,datalist" />
+              </f:facet>  
+             </p:panel>
+            </h:form>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+	    <p:spacer width="10" height="10"> </p:spacer>
+            <h:graphicImage  library="imagenes"  style="width: 600px; height: 400px;" name="chapinero2.png"/> 
+            </h:panelGrid>
+ 
+        
+        </ui:define>
+    </ui:composition>
+</html>

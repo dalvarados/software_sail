@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwPresentacionNinosCreateDlg" widgetVar="VwPresentacionNinosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVwPresentacionNinosTitle}">
+            <h:form id="VwPresentacionNinosCreateForm">
+                <h:panelGroup id="display33">
+                    <p:panelGrid columns="2" rendered="#{vwPresentacionNinosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_idPersona}" for="idPersona" />
+                        <p:inputText id="idPersona" value="#{vwPresentacionNinosController.selected.idPersona}" title="#{bundle.CreateVwPresentacionNinosTitle_idPersona}" required="true" requiredMessage="#{bundle.CreateVwPresentacionNinosRequiredMessage_idPersona}"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar id="fechaRegistro" pattern="MM/dd/yyyy" value="#{vwPresentacionNinosController.selected.fechaRegistro}" title="#{bundle.EditVwPresentacionNinosTitle_fechaRegistro}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{vwPresentacionNinosController.selected.nombre}" title="#{bundle.CreateVwPresentacionNinosTitle_nombre}" required="true" requiredMessage="#{bundle.CreateVwPresentacionNinosRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{vwPresentacionNinosController.selected.apellidos}" title="#{bundle.CreateVwPresentacionNinosTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateVwPresentacionNinosRequiredMessage_apellidos}"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{vwPresentacionNinosController.selected.fechaNacimiento}" title="#{bundle.EditVwPresentacionNinosTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText id="documentoIdentidad" value="#{vwPresentacionNinosController.selected.documentoIdentidad}" title="#{bundle.CreateVwPresentacionNinosTitle_documentoIdentidad}" />
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_nombrePadres}" for="nombrePadres" />
+                        <p:inputText id="nombrePadres" value="#{vwPresentacionNinosController.selected.nombrePadres}" title="#{bundle.CreateVwPresentacionNinosTitle_nombrePadres}" />
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{vwPresentacionNinosController.selected.fechaInicio}" title="#{bundle.EditVwPresentacionNinosTitle_fechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_descripcionEvento}" for="descripcionEvento" />
+                        <p:inputText id="descripcionEvento" value="#{vwPresentacionNinosController.selected.descripcionEvento}" title="#{bundle.CreateVwPresentacionNinosTitle_descripcionEvento}" />
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_nombreIglesia}" for="nombreIglesia" />
+                        <p:inputText id="nombreIglesia" value="#{vwPresentacionNinosController.selected.nombreIglesia}" title="#{bundle.CreateVwPresentacionNinosTitle_nombreIglesia}" required="true" requiredMessage="#{bundle.CreateVwPresentacionNinosRequiredMessage_nombreIglesia}"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_nombreCiudad}" for="nombreCiudad" />
+                        <p:inputText id="nombreCiudad" value="#{vwPresentacionNinosController.selected.nombreCiudad}" title="#{bundle.CreateVwPresentacionNinosTitle_nombreCiudad}" required="true" requiredMessage="#{bundle.CreateVwPresentacionNinosRequiredMessage_nombreCiudad}"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_nombreDepartamento}" for="nombreDepartamento" />
+                        <p:inputText id="nombreDepartamento" value="#{vwPresentacionNinosController.selected.nombreDepartamento}" title="#{bundle.CreateVwPresentacionNinosTitle_nombreDepartamento}" required="true" requiredMessage="#{bundle.CreateVwPresentacionNinosRequiredMessage_nombreDepartamento}"/>
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_pastor}" for="pastor" />
+                        <p:inputText id="pastor" value="#{vwPresentacionNinosController.selected.pastor}" title="#{bundle.CreateVwPresentacionNinosTitle_pastor}" />
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_edad}" for="edad" />
+                        <p:inputText id="edad" value="#{vwPresentacionNinosController.selected.edad}" title="#{bundle.CreateVwPresentacionNinosTitle_edad}" />
+                        <p:outputLabel value="#{bundle.CreateVwPresentacionNinosLabel_clasificacion}" for="clasificacion" />
+                        <p:inputText id="clasificacion" value="#{vwPresentacionNinosController.selected.clasificacion}" title="#{bundle.CreateVwPresentacionNinosTitle_clasificacion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vwPresentacionNinosController.create}" value="#{bundle.Save}" update="display33,:VwPresentacionNinosListForm:datalist3,:growl" oncomplete="handleSubmit(args,'VwPresentacionNinosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VwPresentacionNinosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

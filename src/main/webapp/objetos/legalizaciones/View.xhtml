@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LegalizacionesViewDlg" widgetVar="LegalizacionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewLegalizacionesTitle}">
+            <h:form id="LegalizacionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{legalizacionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_idLegalizacion}"/>
+                        <h:outputText value="#{legalizacionesController.selected.idLegalizacion}" title="#{bundle.ViewLegalizacionesTitle_idLegalizacion}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_fechaRegistro}"/>
+                        <h:outputText value="#{legalizacionesController.selected.fechaRegistro}" title="#{bundle.ViewLegalizacionesTitle_fechaRegistro}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_numeroTipoContable}"/>
+                        <h:outputText value="#{legalizacionesController.selected.numeroTipoContable}" title="#{bundle.ViewLegalizacionesTitle_numeroTipoContable}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_descripcion}"/>
+                        <h:outputText value="#{legalizacionesController.selected.descripcion}" title="#{bundle.ViewLegalizacionesTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_docReferencia}"/>
+                        <h:outputText value="#{legalizacionesController.selected.docReferencia}" title="#{bundle.ViewLegalizacionesTitle_docReferencia}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_valorDebito}"/>
+                        <h:outputText value="#{legalizacionesController.selected.valorDebito}" title="#{bundle.ViewLegalizacionesTitle_valorDebito}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_valorCredito}"/>
+                        <h:outputText value="#{legalizacionesController.selected.valorCredito}" title="#{bundle.ViewLegalizacionesTitle_valorCredito}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_diferencia}"/>
+                        <h:outputText value="#{legalizacionesController.selected.diferencia}" title="#{bundle.ViewLegalizacionesTitle_diferencia}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_fechaTipoContable}"/>
+                        <h:outputText value="#{legalizacionesController.selected.fechaTipoContable}" title="#{bundle.ViewLegalizacionesTitle_fechaTipoContable}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_anulado}"/>
+                        <h:outputText value="#{legalizacionesController.selected.anulado}" title="#{bundle.ViewLegalizacionesTitle_anulado}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_idUsuario}"/>
+                        <h:outputText value="#{legalizacionesController.selected.idUsuario}" title="#{bundle.ViewLegalizacionesTitle_idUsuario}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_idPuc}"/>
+                        <h:outputText value="#{legalizacionesController.selected.idPuc}" title="#{bundle.ViewLegalizacionesTitle_idPuc}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_idTipoContable}"/>
+                        <h:outputText value="#{legalizacionesController.selected.idTipoContable}" title="#{bundle.ViewLegalizacionesTitle_idTipoContable}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_idTercero}"/>
+                        <h:outputText value="#{legalizacionesController.selected.idTercero}" title="#{bundle.ViewLegalizacionesTitle_idTercero}"/>
+                        <h:outputText value="#{bundle.ViewLegalizacionesLabel_idAsiento}"/>
+                        <h:outputText value="#{legalizacionesController.selected.idAsiento}" title="#{bundle.ViewLegalizacionesTitle_idAsiento}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="LegalizacionesViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

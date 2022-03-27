@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwOfrendaMensualCreateDlg" widgetVar="VwOfrendaMensualCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVwOfrendaMensualTitle}">
+            <h:form id="VwOfrendaMensualCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwOfrendaMensualController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVwOfrendaMensualLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{vwOfrendaMensualController.selected.id}" title="#{bundle.CreateVwOfrendaMensualTitle_id}" />
+                        <p:outputLabel value="#{bundle.CreateVwOfrendaMensualLabel_fecha}" for="fecha" />
+                        <p:inputText id="fecha" value="#{vwOfrendaMensualController.selected.fecha}" title="#{bundle.CreateVwOfrendaMensualTitle_fecha}" />
+                        <p:outputLabel value="#{bundle.CreateVwOfrendaMensualLabel_nombreComite}" for="nombreComite" />
+                        <p:inputText id="nombreComite" value="#{vwOfrendaMensualController.selected.nombreComite}" title="#{bundle.CreateVwOfrendaMensualTitle_nombreComite}" required="true" requiredMessage="#{bundle.CreateVwOfrendaMensualRequiredMessage_nombreComite}"/>
+                        <p:outputLabel value="#{bundle.CreateVwOfrendaMensualLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{vwOfrendaMensualController.selected.valor}" title="#{bundle.CreateVwOfrendaMensualTitle_valor}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vwOfrendaMensualController.create}" value="#{bundle.Save}" update="display,:VwOfrendaMensualListForm:datalist,:growl" oncomplete="handleSubmit(args,'VwOfrendaMensualCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VwOfrendaMensualCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+            <ui:define name="title">
+             <f:event type="preRenderView" listener="#{calendarioController.inicializarCalendario()}"/>            
+        </ui:define>    
+        
+
+       <ui:define name="body" >   
+                    <style type="text/css">
+                .ui-layout-unit-content{background-image:url('../resources/imagenes/wall-g836810b4e_1920.jpg');background-repeat:no-repeat ;background-size:100% auto; margin:0px;}
+            </style>
+      
+
+    <h:panelGrid columns="5" cellpadding="0">
+    <script>
+       PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+        };       
+        </script>
+      
+              <h:form id="CalendarioListForm"> 
+                <p:growl id="msgGrowl" showDetail="true" />
+                 <br></br>
+                  <h3 style="margin-top: 0">Agenda Ipuc Chapinero</h3>
+
+                  <p:schedule  style="width: 450px" widgetVar="menuCalendario" value="#{calendarioController.eventModel}" id="shEvento" timeZone="America/Bogota" locale="es">   
+                    <p:ajax event="eventSelect" listener="#{calendarioController.seleccionado}" update="eventoDetalle" oncomplete="PF('dialog').show();"/>
+                    <p:ajax event="dateSelect" listener="#{calendarioController.nuevoCalendar}" update="eventoDetalle" oncomplete="PF('dialog').show();"/>                    
+                 </p:schedule> 
+                
+            <p:dialog widgetVar="dialog" header="Nueva Agenda" resizable="false" modal="false" showEffect="clip" >
+                <p:outputPanel id="eventoDetalle">
+                  <h:panelGrid columns="2">
+                     <p:outputLabel value="Titulo"/>
+                        <p:inputText style="width: 300px" value="#{calendarioController.calendario.tituloEvento}"/>    
+                        
+                        <p:outputLabel value="Tipo Evento" for="tipo" />
+                        <p:selectOneMenu id="tipo" value="#{calendarioController.calendario.tipo}">
+                            <f:selectItem itemLabel="Evento" itemValue="Evento" />                            
+                            <f:selectItem itemLabel="Presentacion de niños" itemValue="Presentacion de niños" />
+                            <f:selectItem itemLabel="Membresia local" itemValue="Membresia local" />
+                            <f:selectItem itemLabel="Reuniones" itemValue="Reuniones" />
+                            <f:selectItem itemLabel="Compromisos" itemValue="Compromisos" />
+                        </p:selectOneMenu>                          
+                        
+                  </h:panelGrid>
+                        <br></br>
+                        <h:panelGrid columns="4">                            
+                            <p:outputLabel value="Fecha Inicio"/>
+                            <p:calendar value="#{calendarioController.calendario.fechaInicio}"  timeZone="America/Bogota" locale="es" pattern="yyyy/MM/dd HH:mm"  />                                                         
+
+                            <p:outputLabel value="Fecha Fin"/>
+                            <p:calendar value="#{calendarioController.calendario.fechaFin}" timeZone="America/Bogota" locale="es" pattern="yyyy/MM/dd HH:mm"/>                                                         
+
+                            <p:outputLabel value="Lugar"/>
+                            <p:inputText  value="#{calendarioController.calendario.lugar}"/>    
+                            
+                            <p:outputLabel value="#{bundle.CreateOfrendaLabel_idComite}" for="idComite" />
+                              <p:selectOneMenu id="idComite" value="#{calendarioController.calendario.idComite}" required="true" requiredMessage="#{bundle.EditOfrendaRequiredMessage_idComite}">
+                               <f:selectItems value="#{comiteController.itemsAvailableSelectOne}"
+                                           var="idComiteItem"
+                                           itemValue="#{idComiteItem}" itemLabel="#{idComiteItem.nombreComite}"/>
+                               </p:selectOneMenu>
+                            <p:outputLabel value="Descripcion"/>
+                            <p:inputTextarea style="width: 240px" value="#{calendarioController.calendario.descripcionEvento}"/>    
+                        </h:panelGrid>
+                        <p:separator/>
+                    <p:panel id="toggleableNiños"  collapsed="true" header="Datos Adicionales"  toggleable="true" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+                        <p:ajax event="close" listener="#{panelView.onClose}" />
+                        <p:ajax event="toggle" listener="#{panelView.onToggle}"  /> 
+                      <h:panelGrid columns="2" >
+                            <h:outputLabel value="documentoIdentidad: " for="docIdentidad" />                    
+                            <p:selectOneMenu id="docIdentidad" value="#{calendarioController.calendario.documentoIdentidad}">
+                                <f:selectItem itemLabel="" itemValue="" />  
+                                <f:selectItems value="#{vwPresentacionNinosController.itemsAvailableSelectOne}"
+                                           var="docIdentidadItem"
+                                           itemValue="#{docIdentidadItem.idPersona}" itemLabel="#{docIdentidadItem.nombre.concat(' ').concat(docIdentidadItem.apellidos)}"/>
+                               </p:selectOneMenu>
+
+                      </h:panelGrid>
+                    </p:panel> 
+                        
+                        <p:commandButton value="Guardar"  actionListener="#{calendarioController.guardarCalendario}" update="msgGrowl shEvento" oncomplete="PF('dialog').hide();" />      
+                    </p:outputPanel>
+                </p:dialog>     
+    </h:form>  
+            <p:spacer width="210" height="20"> </p:spacer>
+       </h:panelGrid>
+           
+      </ui:define>
+       </ui:composition>
+</html>

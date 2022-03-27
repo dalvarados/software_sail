@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwPresentacionNinosCreateDlg" widgetVar="VwPresentacionNinosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVwPresentacionNinosTitle}">
+            <h:form id="VwPresentacionNinosCreateForm">
+                <h:panelGroup id="display">
+
+                    <p:panelGrid columns="4" rendered="#{personaController.objeto_persona != null}">
+
+                        <p:outputLabel value="Folio" for="folio" />
+                        <p:inputText id="folio" value="#{personaController.objeto_persona.folio}"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaRegistro}" for="fechaRegistro"  />
+                        <p:calendar mindate="" id="fechaRegistro"  pattern="dd/MM/yyyy" required="true" requiredMessage="La fecha de registro es obligatoria" value="#{personaController.objeto_persona.fechaRegistro}" title="#{bundle.EditPersonaTitle_fechaRegistro}"  showOn="button"/>
+                        
+                        <p:outputLabel value="Tipo Documento" for="tipoDocumento" />
+                        <p:selectOneMenu id="tipoDocumento" value="#{personaController.objeto_persona.tipoDocumento}">
+                        <f:selectItem itemLabel="TI" itemValue="Tarjeta de identidad" />
+                        <f:selectItem itemLabel="CE" itemValue="cédula de extranjería" />
+                        <f:selectItem itemLabel="PP" itemValue="Pasaporte" />                        
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText  id="documentoIdentidad" value="#{personaController.objeto_persona.documentoIdentidad}" title="#{bundle.CreatePersonaTitle_documentoIdentidad}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_documentoIdentidad}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personaController.objeto_persona.nombre}" title="#{bundle.CreatePersonaTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombre}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_apellidos}" for="apellidos" />
+                        <p:inputText  id="apellidos" value="#{personaController.objeto_persona.apellidos}" title="#{bundle.CreatePersonaTitle_apellidos}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_apellidos}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{personaController.objeto_persona.sexo}" required="true" requiredMessage="El campo sexo es obligatorio">
+                        <f:selectItem itemLabel="" itemValue="" />                             
+                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                        </p:selectOneMenu>                        
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{personaController.objeto_persona.direccion}" title="#{bundle.CreatePersonaTitle_direccion}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{personaController.objeto_persona.telefono}" title="#{bundle.CreatePersonaTitle_telefono}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaNacimiento}" for="fechaNacimiento"/>
+                        <p:calendar id="fechaNacimiento" pattern="dd/MM/yyyy" required="true" requiredMessage="La fecha de nacimiento es obligatoria" value="#{personaController.objeto_persona.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idBarrio}" for="idBarrio" />
+                        <p:selectOneMenu id="idBarrio" value="#{personaController.objeto_persona.idBarrio}" >
+                            <f:selectItem itemLabel="" itemValue="" /> 
+                            <f:selectItems value="#{barrioController.itemsAvailableSelectOne}"
+                                           var="idBarrioItem"
+                                           itemValue="#{idBarrioItem}" itemLabel="#{idBarrioItem.nombreBarrio}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idLugarNacimiento}" for="idLugarNacimiento" />
+                        <p:selectOneMenu id="idLugarNacimiento" value="#{personaController.objeto_persona.idLugarNacimiento}" >
+                            <f:selectItem itemLabel="" itemValue="" /> 
+                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
+                                           var="idLugarNacimientoItem"
+                                           itemValue="#{idLugarNacimientoItem}" itemLabel="#{idLugarNacimientoItem.nombreCiudad}"/>
+                        </p:selectOneMenu>
+                      
+                        <p:outputLabel value="Nombre de Padres" for="nombrePadres" />
+                        <p:inputText  id="nombrePadres" value="#{personaController.objeto_persona.nombrePadres}"/>
+                        
+                    </p:panelGrid>
+                      
+                    <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:VwPresentacionNinosListForm:datalist,:growl" oncomplete="handleSubmit(args,'VwPresentacionNinosCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

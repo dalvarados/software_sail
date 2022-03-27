@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_carta_recomendacion" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="24d05139-79c7-4593-961b-882c082ea7ac">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="240"/>
+	<parameter name="parameter1" class="java.lang.String"/>
+	<field name="nombreIglesia" class="java.lang.String"/>
+	<field name="nombreCiudad" class="java.lang.String"/>
+	<field name="telefono" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="tipoDocumento" class="java.lang.String"/>
+	<field name="documentoIdentidad" class="java.lang.String"/>
+	<field name="nombreDepartamento" class="java.lang.String"/>
+	<field name="dia" class="java.lang.String"/>
+	<field name="mes" class="java.lang.String"/>
+	<field name="anio" class="java.lang.String"/>
+	<field name="pastor" class="java.lang.String"/>
+	<field name="identificacionPastor" class="java.lang.String"/>
+	<field name="hermano" class="java.lang.String"/>
+	<field name="identificado" class="java.lang.String"/>
+	<field name="integro" class="java.lang.String"/>
+	<field name="temeroso" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="elhermano" class="java.lang.String"/>
+	<field name="fechaMembreciaLocal" class="java.util.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement x="85" y="78" width="153" height="20" uuid="c5c59bec-ff0e-421d-aac4-fb3cb3ed43de"/>
+				<textElement>
+					<font fontName="Lucida Sans" isBold="false"/>
+				</textElement>
+				<text><![CDATA[EL SUSCRITO PASTOR DE LA ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="258" y="98" width="100" height="20" uuid="a72e63fc-b696-4cdb-befb-8d3c21dc088e"/>
+				<textFieldExpression><![CDATA[$F{nombreCiudad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="240" y="98" width="27" height="20" uuid="33d8eab3-746c-4767-aebe-b5c934d637ed"/>
+				<text><![CDATA[EN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="235" y="78" width="241" height="20" uuid="7ddeb9f4-8d80-4bba-8cd8-5758a6d7a871"/>
+				<textElement>
+					<font fontName="Lucida Sans" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[IGLESIA PENTECOSTAL UNIDA DE COLOMBIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="122" splitType="Stretch">
+			<textField>
+				<reportElement x="171" y="0" width="100" height="20" uuid="026dc388-4b12-4863-9afd-2f0143920495"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="166" y="68" width="219" height="54" uuid="1ab3aa45-2aca-409b-87eb-61d62c4e6280"/>
+				<textElement>
+					<font fontName="Lucida Sans" size="26" isBold="false"/>
+				</textElement>
+				<text><![CDATA[CERTIFICA QUE: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="1" width="45" height="20" uuid="36aaee01-dc0b-4fee-a2ff-0932f43d8476"/>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="348" y="1" width="100" height="20" uuid="ef0d0be6-5fd2-459d-90d2-4005574ffb2c"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="120" y="1" width="100" height="20" uuid="7b3247e2-0550-45c5-b926-e01d08212ff2"/>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="442" splitType="Stretch">
+			<staticText>
+				<reportElement x="35" y="31" width="23" height="20" uuid="c298913c-2a2b-4535-9787-66829680ab4b"/>
+				<text><![CDATA[Que  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="113" y="31" width="229" height="20" uuid="9e45b61e-efa0-4a13-b531-f8ea13d50569"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="385" y="31" width="34" height="20" uuid="2b5e72d1-8725-4bff-b663-032063a449ae"/>
+				<text><![CDATA[con
+]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="406" y="31" width="129" height="20" uuid="81a0e121-72cb-4934-89bb-731d5cf40e75"/>
+				<textFieldExpression><![CDATA[$F{tipoDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="73" y="62" width="76" height="20" uuid="3dd50c27-ad0f-4558-a694-19992a32b3e7"/>
+				<textFieldExpression><![CDATA[$F{documentoIdentidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="129" y="62" width="335" height="20" uuid="8d488918-41da-48fd-a276-ff4295418273"/>
+				<text><![CDATA[, figura en los registros de la iglesia como miembro activo desde el dia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="165" width="134" height="20" uuid="cbb0c74f-0231-4b8d-9ee3-d467d3a4964a"/>
+				<text><![CDATA[Se firma en la ciudad de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="161" y="165" width="100" height="20" uuid="7305b5dc-37f3-4959-9da6-972f31e056ca"/>
+				<textFieldExpression><![CDATA[$F{nombreCiudad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="165" width="109" height="20" uuid="a83e7d89-b546-42e0-9c82-2f31c24e107e"/>
+				<textFieldExpression><![CDATA[$F{nombreDepartamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="450" y="165" width="33" height="20" uuid="6fd58e5e-c3aa-44da-bce3-9da6ae3f0ed5"/>
+				<text><![CDATA[a los ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="37" y="194" width="79" height="20" uuid="907e4a4c-158d-4c36-b06f-415ff291568a"/>
+				<text><![CDATA[dias del mes de ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="476" y="165" width="42" height="20" uuid="7d18ad19-79ad-4bb7-96e9-5024583425e5"/>
+				<textFieldExpression><![CDATA[$F{dia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="194" width="44" height="20" uuid="fe01cf1b-ee23-4bd8-969d-5477c0727d9d"/>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="161" y="194" width="48" height="20" uuid="9db49be7-66db-4d2c-92da-2f324a168d60"/>
+				<text><![CDATA[del año ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="194" width="33" height="20" uuid="19cb4dd8-2d1c-49ad-b4f1-816b850182d7"/>
+				<textFieldExpression><![CDATA[$F{anio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="249" y="165" width="100" height="20" uuid="3e2b3707-165a-4627-94d1-a56c2595ef0e"/>
+				<text><![CDATA[departamento de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="59" y="31" width="52" height="20" uuid="c0651858-f562-4f84-ab62-d8c4a603e4de"/>
+				<textFieldExpression><![CDATA[$F{hermano}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="331" y="31" width="61" height="20" uuid="1425c5a7-af2c-4760-8641-a6dd68118f17"/>
+				<textFieldExpression><![CDATA[$F{identificado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="93" width="500" height="62" uuid="449946f4-cd4e-4aa4-9dc3-30fd64bbff3d"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="225" y="194" width="17" height="20" uuid="d5cae615-d512-4738-b3ad-81cc4eb5e241"/>
+				<text><![CDATA[.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="35" y="62" width="44" height="20" uuid="82d9d727-d584-4c4b-aca9-36b6d63c2268"/>
+				<text><![CDATA[número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="259" width="100" height="20" uuid="278be472-cacf-44e5-9e30-8f9359451077"/>
+				<text><![CDATA[Cordialmente,]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="35" y="371" width="148" height="20" uuid="6fc79b63-e378-4c57-9d52-647925b72fd0"/>
+				<textFieldExpression><![CDATA[$F{pastor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="35" y="391" width="137" height="20" uuid="460c4a83-67f2-4e09-a2da-7c9dd810e4d7"/>
+				<textFieldExpression><![CDATA[$F{tipoDocumento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="143" y="391" width="134" height="20" uuid="7030a0ee-44af-417e-b54c-848ead9f9d06"/>
+				<textFieldExpression><![CDATA[$F{identificacionPastor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="411" width="100" height="20" uuid="888fa4a4-595c-43ba-bf7c-591ced1d3f8c"/>
+				<text><![CDATA[Pastor iglesia ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="105" y="411" width="100" height="20" uuid="9b7a299b-95f0-4ddc-b286-c396e50fc378"/>
+				<textFieldExpression><![CDATA[$F{nombreIglesia}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="35" y="371" width="100" height="1" uuid="58c4e916-fc18-4766-8f0c-254d1108c1cd"/>
+			</line>
+			<image>
+				<reportElement x="35" y="280" width="100" height="88" uuid="3f894510-fbdf-490b-85d7-266cf01b41da"/>
+				<imageExpression><![CDATA["C:\\NellehSoft\\software_sail\\software_sail\\src\\main\\webapp\\resources\\imagenes\\FIRMA TOMAS.JPG"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="443" y="62" width="43" height="20" uuid="e509a506-7594-492c-ae40-d4d54a6af92d"/>
+				<textFieldExpression><![CDATA[$F{fechaMembreciaLocal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="478" y="60" width="9" height="20" uuid="f2876587-3583-44af-989c-13c49f7afb0b"/>
+				<text><![CDATA[.]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="27" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="19" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="23" splitType="Stretch"/>
+	</summary>
+</jasperReport>

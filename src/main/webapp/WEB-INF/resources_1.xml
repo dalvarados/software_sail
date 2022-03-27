@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="mysql_sail_soft" type="javax.sql.DataSource">#Sat Aug 25 12:03:59 COT 2018
+jdbcDriver=com.mysql.jdbc.Driver
+password=6510351
+userName=bd_sail
+defaultAutoCommit = false
+testOnReturn = true
+testWhileIdle = true
+timeBetweenEvictionRunsMillis = 60
+initialSize = 2
+minIdle = 2
+validationQuery = "select 1"      
+jdbcUrl=jdbc\:mysql\://localhost\:3306/bd_sail?zeroDateTimeBehavior\=convertToNull
+</Resource>
+  <Resource id="mysql" type="javax.sql.DataSource">#Sat Aug 25 12:04:27 COT 2018
+jdbcDriver=com.mysql.jdbc.Driver
+password=6510351
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/bd_sail?zeroDateTimeBehavior\=convertToNull
+</Resource>
+  <Resource id="HH" type="javax.sql.DataSource">#Wed Aug 29 20:45:09 COT 2018
+jdbcDriver=com.mysql.jdbc.Driver
+password=6510351
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/bd_sail?zeroDateTimeBehavior\=convertToNull
+</Resource>
+</resources>

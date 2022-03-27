@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVwDiezmoMensualTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+              <h:panelGrid columns="4" > 
+            <h:form id="VwDiezmoMensualListForm">
+              <br></br>
+              <p:panel header="Histograma de Diezmos Mensual" style="width:550px;">
+                                    <br></br><br></br><br></br>
+                                    <p:dataTable id="datalist" value="#{vwDiezmoMensualController.list_diezmo}" var="item"
+                                 selectionMode="single" selection="#{vwDiezmoMensualController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.fecha}" paginatorPosition="bottom"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwDiezmoMensualTitle_fecha}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fecha}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwDiezmoMensualTitle_valor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valor}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+              <p:spacer width="10" height="400" />
+              <p:chart  id="histoDiezmo" type="bar" model="#{vwDiezmoMensualController.barModel}" style="height: 300px;width: 560px" />
+                  
+        </h:panelGrid>
+        </ui:define>
+    </ui:composition>
+
+</html>

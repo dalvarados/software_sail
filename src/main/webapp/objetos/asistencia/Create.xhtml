@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsistenciaCreateDlg" widgetVar="AsistenciaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAsistenciaTitle}">
+            <h:form id="AsistenciaCreateForm">
+
+                <h:panelGroup id="display">
+
+                    <p:panelGrid columns="2" rendered="#{asistenciaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_fechaAsistencia}" for="fechaAsistencia" />
+                        <p:calendar id="fechaAsistencia" pattern="dd/MM/yyyy" value="#{asistenciaController.selected.fechaAsistencia}" title="#{bundle.EditAsistenciaTitle_fechaAsistencia}" required="true" requiredMessage="#{bundle.EditAsistenciaRequiredMessage_fechaAsistencia}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_cantTotal}" for="cantTotal" />
+                        <p:inputText id="cantTotal" value="#{asistenciaController.selected.cantTotal}" title="#{bundle.CreateAsistenciaTitle_cantTotal}" />
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_idComite}" for="idComite" />
+                        <p:selectOneMenu id="idComite" value="#{asistenciaController.selected.idComite}" required="true" requiredMessage="#{bundle.EditAsistenciaRequiredMessage_idComite}">
+                            <f:selectItems value="#{comiteController.itemsAvailableSelectOne}"
+                                           var="idComiteItem"
+                                           itemValue="#{idComiteItem}" itemLabel="#{idComiteItem.nombreComite}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel  value="#{bundle.CreateAsistenciaLabel_idResponsablePpal}" for="idResponsablePpal" />
+                        <p:selectOneMenu id="idResponsablePpal" value="#{asistenciaController.selected.idResponsablePpal}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idResponsablePpalItem"
+                                           itemValue="#{idResponsablePpalItem}" itemLabel="#{idResponsablePpalItem.nombre.concat(' ').concat(idResponsablePpalItem.apellidos )}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:panel id="toggleable" collapsed="true" header="Registrar Detalle"  toggleable="true" closable="false" toggleSpeed="500" closeSpeed="500" widgetVar="panel" style="margin-bottom:20px">
+        <p:ajax event="close" listener="#{panelView.onClose}" />
+        <p:ajax event="toggle" listener="#{panelView.onToggle}"  />
+ 
+         <h:panelGrid columns="2" >
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_cantNinos}" for="cantNinos" />
+                        <p:inputText id="cantNinos" value="#{asistenciaController.selected.cantNinos}" title="#{bundle.CreateAsistenciaTitle_cantNinos}"  />
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_cantJovenes}" for="cantJovenes" />
+                        <p:inputText id="cantJovenes" value="#{asistenciaController.selected.cantJovenes}" title="#{bundle.CreateAsistenciaTitle_cantJovenes}" />
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_cantAdultos}" for="cantAdultos" />
+                        <p:inputText id="cantAdultos" value="#{asistenciaController.selected.cantAdultos}" title="#{bundle.CreateAsistenciaTitle_cantAdultos}" />
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_cantAncianos}" for="cantAncianos" />
+                        <p:inputText id="cantAncianos" value="#{asistenciaController.selected.cantAncianos}" title="#{bundle.CreateAsistenciaTitle_cantAncianos}" />
+                        <p:outputLabel value="#{bundle.CreateAsistenciaLabel_cantVisitas}" for="cantVisitas" />
+                        <p:inputText id="cantVisitas" value="#{asistenciaController.selected.cantVisitas}" title="#{bundle.CreateAsistenciaTitle_cantVisitas}" />
+        </h:panelGrid>
+        
+
+     </p:panel>                        
+                    <p:commandButton actionListener="#{asistenciaController.create}" value="#{bundle.Save}" update="display,:AsistenciaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AsistenciaCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

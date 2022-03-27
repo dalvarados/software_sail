@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <a href="Create_Egreso.xhtml"></a>
+    <ui:composition>
+
+        <p:dialog id="AsientoContableEgresoCreateDlg" closable="false" widgetVar="AsientoContableEgresoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear Egreso">
+            <h:form id="AsientoContableEgresoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="6" rendered="#{asientoContableController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar  size="10" id="fechaRegistro" pattern="dd/MM/yyyy" value="#{asientoContableController.selected.fechaRegistro}" title="#{bundle.EditAsientoContableTitle_fechaRegistro}"  showOn="button"/>
+
+                        <p:outputLabel value="Comprobante" for="tipoContable" />
+                        <p:selectOneMenu style="width: 170px" id="tipoContable" value="#{asientoContableController.selected.idTipoContable}">
+                            <f:selectItems value="#{asientoContableController.listaTipoContableEgreso}"
+                                           var="idTipoContableItem"
+                                           itemValue="#{idTipoContableItem}" itemLabel="#{idTipoContableItem.nombre}"/>                        
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel value="Tercero" for="idTercero" />
+                        <p:selectOneMenu filter="true" filterMatchMode="startsWith" style="width: 170px" id="idTercero" value="#{asientoContableController.selected.idTercero}" >
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItems value="#{asientoContableController.rol_tercero}"
+                                           var="idTerceroItem"
+                                           itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
+                        </p:selectOneMenu>                        
+                        
+                        <p:outputLabel value="N° Egreso" for="numeroTipoContable" />
+                        <p:inputText style="width: 90px" id="numeroTipoContable" value="#{asientoContableController.numero_tipo_contable}" title="#{bundle.CreateAsientoContableTitle_numeroTipoContable}" />
+
+                        <p:outputLabel value="Cuenta" for="idPuc" />
+                        <p:selectOneMenu  filter="true" filterMatchMode="startsWith" style="width: 170px" id="idPuc" value="#{asientoContableController.selected.idPuc}" >                                                                 
+                        <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItems  value="#{cuentasPucController.list_obtener_cuentas_favoritas}"                                        
+                                           var="idPucItem" 
+                                           itemValue="#{idPucItem}" itemLabel="#{idPucItem.nombre} "/>
+                        </p:selectOneMenu>                        
+                        
+                        <p:outputLabel  for="tipovalor" value="Tipo" />
+                        <h:panelGrid columns="2" >
+                        <p:selectOneRadio  id="tipovalor" value = "#{asientoContableController.tipoValor}">
+                        <f:selectItem itemLabel="Debito" itemValue="DB" />
+                        <f:selectItem itemLabel="Credito" itemValue="CR" />
+                       </p:selectOneRadio>
+                        </h:panelGrid>
+                        
+                        <p:outputLabel value="Doc Referencia" for="docReferencia" />                       
+                        <p:inputText style="width: 90px" id="docReferencia" value="#{asientoContableController.selected.docReferencia}" />
+                        
+                        <p:outputLabel value="Valor" for="valorDebito" />
+                        <p:inputText style="width: 185px" id="valorDebito" value="#{asientoContableController.selected.valorDebito}" title="#{bundle.CreateAsientoContableTitle_valorDebito}" />                        
+                        
+                        <p:outputLabel value="Descripcion" for="descripcion" />
+                        <p:inputTextarea style="width: 210px" id="descripcion" value="#{asientoContableController.selected.descripcion}" title="#{bundle.CreateAsientoContableTitle_descripcion}" />
+                    </p:panelGrid>
+                  <p:panelGrid columns="10">
+                    <p:outputLabel style="font-weight:bold" value="Saldo Fondo "/>
+                    <h:outputLabel value="#{asientoContableController.saldoFondoLocal}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                    <p:outputLabel style="font-weight:bold" value="Debitos " />
+                    <h:outputLabel value="#{asientoContableController.debito}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                    <p:outputLabel style="font-weight:bold" value="Creditos " />
+                    <h:outputLabel value="#{asientoContableController.credito}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                    <p:outputLabel style="font-weight:bold" value="Diferencia " />
+                    <h:outputLabel value="#{asientoContableController.diferencia}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                
+                        
+                <p:commandButton actionListener="#{asientoContableController.createDocumentoContable}" value="Agregar" update="display,:AsientoContableEgresoListForm:datalist datalistCreateAsientos,:growl">
+                           <f:ajax    render="datalistCreateAsientos"   execute="@this datalistCreateAsientos" />
+                </p:commandButton>                    
+                    <p:commandButton   actionListener="#{asientoContableController.cerrarDocumentoContable}" 
+                                       value="Cerrar" update="display,:AsientoContableEgresoListForm:datalist,:growl" 
+                                       oncomplete="handleSubmit(args,'AsientoContableEgresoCreateDialog');">
+                        <p:confirm  id="genericDialogConfirm21"  header="Alerta"   
+                                    message="Si el documento no esta cuadrado,se ignoran los datos ingresado"   
+                            icon="ui-icon-alert" >                                          
+                        </p:confirm> 
+                    </p:commandButton>   
+                        <p:confirmDialog  id="genericDialogConfirm21" global="true" showEffect="fade" hideEffect="fade"  
+                                          closable="false" widgetVar="wvDialogConfirm" >
+                            <p:commandButton value="Yes" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-closethick" />
+                        </p:confirmDialog>                    
+                </p:panelGrid>         
+
+                    
+            <p:spacer height="15"/>                    
+              <p:panelGrid columns="4" style="width: 750px">                                                         
+                <p:dataTable id="datalistCreateAsientos" value="#{asientoContableController.list_numeroAsientoContable}" 
+                                 var="item2"
+                                 paginator="true" resizableColumns="true"
+                                 rowKey="#{item2.idAsiento}" paginatorPosition="bottom" 
+                                 rows="10" selectionMode="single"  
+                                 selection="#{asientoContableController.selectedDetalle}" 
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                     <p:ajax event="rowSelect"   update=":AsientoContableEgresoCreateForm:display"/>
+                     <p:ajax event="rowUnselect"   update=""/>
+                     
+                    <p:column style="width: 70px">
+                            <f:facet name="header">
+                                <h:outputText value="Fecha"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.fechaRegistro}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cuenta"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.idPuc.codigoCuenta}"/>
+                        </p:column>  
+                        <p:column style="width: 70px">
+                            <f:facet name="header">
+                                <h:outputText value="Cuenta"/>
+                            </f:facet>
+                            <h:outputText style="width: 210px" value="#{item2.idPuc.codigoCuenta}"/>
+                        </p:column>                        
+                        <p:column style="width: 210px">
+                            <f:facet name="header">
+                                <h:outputText value="Tercero"/>
+                            </f:facet>
+                            <h:outputText style="width: 210px" value="#{item2.idTercero.nombre}"/>
+                        </p:column>                        
+                        <p:column style="width: 60px">
+                            <f:facet name="header">
+                                <h:outputText value="Doc N°"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.numeroTipoContable}"/>
+                        </p:column>                       
+                        <p:column style="width: 210px">
+                            <f:facet name="header">
+                                <h:outputText style="width: 210px" value="#{bundle.ListAsientoContableTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.descripcion}"/>
+                        </p:column>
+                        <p:column style="width: 60px">
+                            <f:facet name="header">
+                                <h:outputText value="Debito"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.valorDebito}"/>
+                        </p:column>
+                        <p:column style="width: 60px">
+                            <f:facet name="header">
+                                <h:outputText value="Credito"/>
+                            </f:facet>
+                            <h:outputText value="#{item2.valorCredito}"/>
+                        </p:column>                    
+                 </p:dataTable>
+                       <f:facet name="footer">
+                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}"  update="AsientoContableEditDetalleForm1" oncomplete="PF('AsientoContableEditDetalleDialog1').show()" disabled="#{empty asientoContableController.selectedDetalle}" />
+                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('Esta seguro de eliminar este registro ?')"  actionListener="#{asientoContableController.destroyDocumentoContable}" disabled="#{empty asientoContableController.selectedDetalle}" update="display,:AsientoContableEgresoListForm:datalist datalistCreateAsientos,:growl"/>                                              
+                        </f:facet> 
+                    </p:panelGrid>                                    
+                </h:panelGroup>
+            </h:form>
+          <ui:include src="Editar_detalle_egreso.xhtml"/>
+        </p:dialog>
+    </ui:composition>
+</html>

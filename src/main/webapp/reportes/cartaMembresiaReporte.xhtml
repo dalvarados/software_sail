@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+<ui:composition template="#{usuarioController.templateDinamico()}">
+        
+<ui:define name="body">
+     <h:panelGrid columns="8" >
+        <h:form id="form"> 
+             <br></br><br></br>
+             <p:panel  style="width:650px;" header="Carta de Membresia">
+             <br></br><br></br><br></br>
+             <h:inputText id="documentoIdentidadReport5" value="#{cartaMembresiaReportBean.documentoIdentidadReport}" />
+             <p:commandButton id="start1" type="button" onclick="start()" widgetVar="startButton1" value="Buscar" actionListener="#{cartaMembresiaReportBean.obtener_lista_cartaRecReport()}">              
+             </p:commandButton>
+             <br/><br/>
+             <br/><br/>
+             <h:outputLabel value="Descripcion" />
+             <br/><br/>             
+             <h:inputTextarea style="width:420px; height:60px"  id="descripcion" value="#{cartaMembresiaReportBean.descripcion}" />  
+             
+             <br/><br/>
+              <p:progressBar id="progressBarClient" widgetVar="pbClient" style="width:300px"/>
+             <br></br><br></br>
+ 
+             
+             <h:panelGrid columns="4" >
+             <p:commandButton   id="export5" value="Descargar" actionListener="#{cartaMembresiaReportBean.exportarPDF()}" ajax="false" onclick="form.target='_blank'"/>  
+            <br></br>
+            <p:commandButton  id="ver5"  value="Visualizar" actionListener="#{cartaMembresiaReportBean.verPDF()}" ajax="false" onclick="form.target='_blank'"/> 
+        </h:panelGrid>
+             </p:panel>
+        </h:form>
+            <h:graphicImage  library="imagenes"  style="width: 620px; height: 500px;" name="chapinero2.png"/>  
+        <script type="text/javascript">
+            function start() {
+            PF('startButton1').disable();
+            window['progress'] = setInterval(function() {
+            var pbClient = PF('pbClient'),
+            oldValue = pbClient.getValue(),
+            newValue = oldValue + 50;
+            pbClient.setValue(pbClient.getValue() + 50);            
+                if(newValue === 150) {
+                clearInterval(window['progress']);
+                PF('pbClient').setValue(0);
+                PF('startButton1').enable();
+                } 
+            }, 1000);
+
+        }
+
+       </script>
+    </h:panelGrid>
+    
+  </ui:define>
+</ui:composition>
+
+</html>

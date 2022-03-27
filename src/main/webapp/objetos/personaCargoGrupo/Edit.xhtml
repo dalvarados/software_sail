@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCargoGrupoEditDlg" widgetVar="PersonaCargoGrupoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaCargoGrupoTitle}">
+            <h:form id="PersonaCargoGrupoEditForm">
+                <h:panelGroup id="display">                   
+                    <p:panelGrid columns="5" rendered="#{personaCargoGrupoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonaCargoGrupoLabel_idGrupo}" for="idGrupo" />
+                        <p:selectOneMenu   disabled="true" id="idGrupo" value="#{personaCargoGrupoController.selected.idGrupo}" >
+                            <f:selectItems value="#{grupoController.itemsAvailableSelectOne}"
+                                           var="idGrupoItem"
+                                           itemValue="#{idGrupoItem}" itemLabel="#{idGrupoItem.nombreGrupo}"/>                            
+                        </p:selectOneMenu>  
+                        <p:commandButton  id="buscar" actionListener="#{personaCargoGrupoController.getList_rep_asistencia_grupo()}" value="Buscar"  >
+                            <f:ajax    render="datalistEditGrupo"   execute="@this datalistEditGrupo" />
+                        </p:commandButton>   
+                        <p:outputLabel value="Vigencia" />
+                        <p:selectOneMenu id="vigencia" value="#{personaCargoGrupoController.selected.fecha}" >
+                            <f:selectItem itemLabel="2017" itemValue="2017" />                            
+                            <f:selectItem itemLabel="2018" itemValue="2018" />                            
+                            <f:selectItem itemLabel="2019" itemValue="2019" />
+                            <f:selectItem itemLabel="2020" itemValue="2020" />                            
+                            <f:selectItem itemLabel="2021" itemValue="2021" />                            
+                            <f:selectItem itemLabel="2022" itemValue="2022" />
+                            <f:selectItem itemLabel="2023" itemValue="2023" />                            
+                            <f:selectItem itemLabel="2024" itemValue="2024" />                            
+                            <f:selectItem itemLabel="2025" itemValue="2025" />
+                            <f:selectItem itemLabel="2026" itemValue="2026" />                            
+                            <f:selectItem itemLabel="2027" itemValue="2027" />                            
+                            <f:selectItem itemLabel="2028" itemValue="2028" />                            
+                            <f:selectItem itemLabel="2029" itemValue="2029" />                            
+                            <f:selectItem itemLabel="2030" itemValue="2030" />
+                            <f:selectItem itemLabel="2031" itemValue="2031" />
+                            <f:selectItem itemLabel="2032" itemValue="2032" />
+                            <f:selectItem itemLabel="2033" itemValue="2033" />
+                            <f:selectItem itemLabel="2034" itemValue="2034" />
+                            <f:selectItem itemLabel="2035" itemValue="2035" />                            
+                        </p:selectOneMenu>                         
+                    </p:panelGrid> 
+                    <p:spacer height="30"/>                   
+                    
+                    <p:panelGrid columns="5" rendered="#{personaCargoGrupoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonaCargoGrupoLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{personaCargoGrupoController.selected.idPersona}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}" itemLabel="#{idPersonaItem.nombre.concat(' ').concat(idPersonaItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaCargoGrupoLabel_idCargo}" for="idCargo" />
+                        
+                        <p:selectOneMenu id="idCargo" value="#{personaCargoGrupoController.selected.idCargo}" >
+                            <f:selectItems value="#{cargoController.itemsAvailableSelectOne}"
+                                           var="idCargoItem"
+                                           itemValue="#{idCargoItem}" itemLabel="#{idCargoItem.nombreCargo}"/>
+                        </p:selectOneMenu>
+                        <p:commandButton actionListener="#{personaCargoGrupoController.update}"  value="Editar" update="display,:PersonaCargoGrupoListForm:datalist datalistEditGrupo,:growl" oncomplete="handleSubmit(args, 'PersonaCargoGrupoEditDialog');" >
+                             <f:ajax    render="datalistEditGrupo"   execute="@this datalistEditGrupo" />                      
+                        </p:commandButton>
+                                                                                   
+                    </p:panelGrid>
+                    <p:spacer height="30"/>
+                    
+                    <p:panelGrid columns="2" >
+                        <p:dataTable id="datalistEditGrupo" value="#{personaCargoGrupoController.list_persona_grupo}" var="itemGrupo"
+                                     selectionMode="single"  style="width: 800px"
+                                     paginator="false"  scrollable="true" scrollHeight="200"
+                                 rowKey="#{itemGrupo.idPersonaCargoGrupo}"
+                                 rows="100"
+                                 >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaCargoGrupoTitle_idPersona}"/>
+                            </f:facet>
+                            <h:outputText value="#{itemGrupo.idPersona.nombre.concat(' ').concat(itemGrupo.idPersona.apellidos)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaCargoGrupoTitle_idCargo}"/>
+                            </f:facet>
+                            <h:outputText value="#{itemGrupo.idCargo.nombreCargo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPersonaCargoGrupoTitle_idGrupo}"/>
+                            </f:facet>
+                            <h:outputText value="#{itemGrupo.idGrupo.nombreGrupo}"/>
+                        </p:column>
+
+                    </p:dataTable>                                            
+                        
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

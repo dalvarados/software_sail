@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LegalizacionesEditDlg" widgetVar="LegalizacionesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditLegalizacionesTitle}">
+            <h:form id="LegalizacionesEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{legalizacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_idLegalizacion}" for="idLegalizacion" />
+                        <p:inputText id="idLegalizacion" value="#{legalizacionesController.selected.idLegalizacion}" title="#{bundle.EditLegalizacionesTitle_idLegalizacion}" required="true" requiredMessage="#{bundle.EditLegalizacionesRequiredMessage_idLegalizacion}"/>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar id="fechaRegistro" pattern="MM/dd/yyyy" value="#{legalizacionesController.selected.fechaRegistro}" title="#{bundle.EditLegalizacionesTitle_fechaRegistro}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_numeroTipoContable}" for="numeroTipoContable" />
+                        <p:inputText id="numeroTipoContable" value="#{legalizacionesController.selected.numeroTipoContable}" title="#{bundle.EditLegalizacionesTitle_numeroTipoContable}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{legalizacionesController.selected.descripcion}" title="#{bundle.EditLegalizacionesTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_docReferencia}" for="docReferencia" />
+                        <p:inputText id="docReferencia" value="#{legalizacionesController.selected.docReferencia}" title="#{bundle.EditLegalizacionesTitle_docReferencia}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_valorDebito}" for="valorDebito" />
+                        <p:inputText id="valorDebito" value="#{legalizacionesController.selected.valorDebito}" title="#{bundle.EditLegalizacionesTitle_valorDebito}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_valorCredito}" for="valorCredito" />
+                        <p:inputText id="valorCredito" value="#{legalizacionesController.selected.valorCredito}" title="#{bundle.EditLegalizacionesTitle_valorCredito}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_diferencia}" for="diferencia" />
+                        <p:inputText id="diferencia" value="#{legalizacionesController.selected.diferencia}" title="#{bundle.EditLegalizacionesTitle_diferencia}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_fechaTipoContable}" for="fechaTipoContable" />
+                        <p:calendar id="fechaTipoContable" pattern="MM/dd/yyyy" value="#{legalizacionesController.selected.fechaTipoContable}" title="#{bundle.EditLegalizacionesTitle_fechaTipoContable}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_anulado}" for="anulado" />
+                        <p:inputText id="anulado" value="#{legalizacionesController.selected.anulado}" title="#{bundle.EditLegalizacionesTitle_anulado}" />
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{legalizacionesController.selected.idUsuario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_idPuc}" for="idPuc" />
+                        <p:selectOneMenu id="idPuc" value="#{legalizacionesController.selected.idPuc}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{cuentasPucController.itemsAvailableSelectOne}"
+                                           var="idPucItem"
+                                           itemValue="#{idPucItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_idTipoContable}" for="idTipoContable" />
+                        <p:selectOneMenu id="idTipoContable" value="#{legalizacionesController.selected.idTipoContable}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoContableController.itemsAvailableSelectOne}"
+                                           var="idTipoContableItem"
+                                           itemValue="#{idTipoContableItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_idTercero}" for="idTercero" />
+                        <p:selectOneMenu id="idTercero" value="#{legalizacionesController.selected.idTercero}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{personaController.itemsAvailableSelectOne}"
+                                           var="idTerceroItem"
+                                           itemValue="#{idTerceroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditLegalizacionesLabel_idAsiento}" for="idAsiento" />
+                        <p:selectOneMenu id="idAsiento" value="#{legalizacionesController.selected.idAsiento}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{asientoContableController.itemsAvailableSelectOne}"
+                                           var="idAsientoItem"
+                                           itemValue="#{idAsientoItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{legalizacionesController.update}" value="#{bundle.Save}" update="display,:LegalizacionesListForm:datalist,:growl" oncomplete="handleSubmit(args, 'LegalizacionesEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="LegalizacionesEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

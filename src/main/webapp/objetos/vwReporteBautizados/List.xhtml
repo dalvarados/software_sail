@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+        
+     <ui:define name="title">
+        <h:outputText value="#{bundle.ListPersonaTitle}"></h:outputText>
+     </ui:define>
+
+        <ui:define name="body">
+          <h:panelGrid columns="4" cellpadding="0">
+            <h:form id="PersonaListForm">
+            <br></br>
+            <p:outputLabel value="Fecha Inicio"/>
+             <p:calendar  value="#{vwReporteBautizadosController.fechaInicio}" timeZone="America/Bogota" pattern="yyyy/MM/dd" />                                                         
+             <p:outputLabel value="Fecha Fin"/>
+             
+             <p:calendar value="#{vwReporteBautizadosController.fechaFin}" timeZone="America/Bogota" pattern="yyyy/MM/dd" />             
+             <p:commandButton   value="Buscar" actionListener="#{vwReporteBautizadosController.obtener_ReporteBautizadoLocal()}">
+             <f:ajax   render="datalist totales" execute="@this datalist totales"/> 
+             </p:commandButton>   
+             <br></br><br></br><br></br>
+             
+             <p:panel  style="width:670px;" header="Reporte de Bautizados"> 
+                 <h:panelGrid id="totales"   columns="2" cellpadding="0">
+                        <h:outputText value="Total Bautizados: "/>
+                        <h:outputText   value="#{vwReporteBautizadosController.bautizadosTotal}"/>
+                        <h:outputText value="Total Bautizados Hombres: "/>
+                        <h:outputText value="#{vwReporteBautizadosController.bautizadosHombres}" />
+                        <h:outputText value="Total Bautizados Mujeres: "/>
+                        <h:outputText value="#{vwReporteBautizadosController.bautizadosMujeres}" />
+                        <h:outputText value="Total Bautizados Activos: "/>
+                        <h:outputText value="#{vwReporteBautizadosController.bautizadosMembrecia}" />
+                        <h:outputText value="Total Bautizados Sellados: "/>
+                        <h:outputText value="#{vwReporteBautizadosController.bautizadosSellado}"/>                        
+                    </h:panelGrid>                  
+                    <br></br>
+
+                 <p:dataTable id="datalist" value="#{vwReporteBautizadosController.list_reporteBautizadosLocal}" var="item"
+                                 selectionMode="single" 
+                                 paginator="true" style="width:650px;"
+                                 rowKey="#{item.idPersona}" paginatorPosition="bottom"
+                                 rows="7"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_fechaBautismo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaBautismo}">
+                                <f:convertDateTime pattern="yyyy/MM/dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_documentoIdentidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.documentoIdentidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_apellidos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_sexo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sexo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_edad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.edad}"/>
+                        </p:column>                         
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_sellado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.sellado}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_fechaMembreciaLocal}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaMembreciaLocal}">
+                                <f:convertDateTime pattern="yyyy/MM/dd" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwReporteBautizadosTitle_estadoMembrecia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estadoMembrecia}"/>
+                        </p:column>
+                    </p:dataTable>   
+             </p:panel>
+            </h:form>
+            <h:graphicImage  library="imagenes"  style="width: 620px; height: 500px;" name="chapinero2.png"/>
+            </h:panelGrid>
+        </ui:define>
+    </ui:composition>
+</html>

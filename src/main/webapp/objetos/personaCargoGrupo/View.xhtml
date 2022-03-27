@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCargoGrupoViewDlg" widgetVar="PersonaCargoGrupoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonaCargoGrupoTitle}">
+            <h:form id="PersonaCargoGrupoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaCargoGrupoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonaCargoGrupoLabel_idPersona}"/>
+                        <h:outputText value="#{personaCargoGrupoController.selected.idPersona.nombre.concat(' ').concat(personaCargoGrupoController.selected.idPersona.apellidos)}" title="#{bundle.ViewPersonaCargoGrupoTitle_idPersona}"/>
+                        <h:outputText value="#{bundle.ViewPersonaCargoGrupoLabel_idCargo}"/>
+                        <h:outputText value="#{personaCargoGrupoController.selected.idCargo.nombreCargo}" title="#{bundle.ViewPersonaCargoGrupoTitle_idCargo}"/>
+                        <h:outputText value="#{bundle.ViewPersonaCargoGrupoLabel_fechaAsignacion}"/>
+                        <h:outputText value="#{personaCargoGrupoController.selected.fechaAsignacion}" title="#{bundle.ViewPersonaCargoGrupoTitle_fechaAsignacion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPersonaCargoGrupoLabel_idGrupo}"/>
+                        <h:outputText value="#{personaCargoGrupoController.selected.idGrupo.nombreGrupo}" title="#{bundle.ViewPersonaCargoGrupoTitle_idGrupo}"/>
+                         <h:outputText value="Vigencia"/>
+                         <h:outputText value="#{personaCargoGrupoController.selected.fecha}" />                        
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

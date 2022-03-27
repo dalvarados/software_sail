@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OfrendaEditDlg" widgetVar="OfrendaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditOfrendaTitle}">
+            <h:form id="OfrendaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{ofrendaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_fechaOfrenda}" for="fechaOfrenda" />
+                        <p:calendar id="fechaOfrenda" pattern="dd/MM/yyyy" value="#{ofrendaController.selected.fechaOfrenda}" title="#{bundle.EditOfrendaTitle_fechaOfrenda}" required="true" requiredMessage="#{bundle.EditOfrendaRequiredMessage_fechaOfrenda}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_valorOfrenda}" for="valorOfrenda" />
+                        <p:inputText id="valorOfrenda" value="#{ofrendaController.selected.valorOfrenda}" title="#{bundle.CreateOfrendaTitle_valorOfrenda}" required="true" requiredMessage="#{bundle.CreateOfrendaRequiredMessage_valorOfrenda}"/>
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_numIngreso}" for="numIngreso" />
+                        <p:inputText  readonly="true" id="numIngreso" value="#{ofrendaController.selected.numIngreso}" title="#{bundle.CreateOfrendaTitle_numIngreso}" />
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_idComite}" for="idComite" />
+                        <p:selectOneMenu id="idComite" value="#{ofrendaController.selected.idComite}" required="true" requiredMessage="#{bundle.EditOfrendaRequiredMessage_idComite}">
+                            <f:selectItems value="#{comiteController.itemsAvailableSelectOne}"
+                                           var="idComiteItem"
+                                           itemValue="#{idComiteItem}" itemLabel="#{idComiteItem.nombreComite}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_idResponsablePpal}" for="idResponsablePpal" />
+                        <p:selectOneMenu id="idResponsablePpal" value="#{ofrendaController.selected.idResponsablePpal}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idResponsablePpalItem"
+                                           itemValue="#{idResponsablePpalItem}" itemLabel="#{idResponsablePpalItem.nombre.concat(' ').concat(idResponsablePpalItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_idProposito}" for="idProposito" />
+                        <p:selectOneMenu id="idProposito" value="#{ofrendaController.selected.idProposito}" required="true" requiredMessage="#{bundle.EditOfrendaRequiredMessage_idProposito}">
+                            <f:selectItems value="#{propositoController.itemsAvailableSelectOne}"
+                                           var="idPropositoItem"
+                                           itemValue="#{idPropositoItem}" itemLabel="#{idPropositoItem.nombreProposito}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreateOfrendaLabel_idResponsableSec}" for="idResponsableSec" />
+                        <p:selectOneMenu id="idResponsableSec" value="#{ofrendaController.selected.idResponsableSec}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idResponsableSecItem"
+                                           itemValue="#{idResponsableSecItem}" itemLabel="#{idResponsableSecItem.nombre.concat(' ').concat(idResponsableSecItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Cuenta" for="idPuc" />
+                        <p:selectOneMenu style="width: 170px" id="idPuc" value="#{ofrendaController.selected.idPuc}" >
+                            <f:selectItems value="#{ofrendaController.list_cuenta_activo_caja}"
+                                           var="idPucItem"
+                                           itemValue="#{idPucItem}"  itemLabel="#{idPucItem.nombre}"/>
+                        </p:selectOneMenu>
+
+                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ofrendaController.update}" value="#{bundle.Save}" update="display,:OfrendaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OfrendaEditDialog');"/>
+                    <p:commandButton value="Cerrar"  actionListener="#{ofrendaController.cerrar}" update="display,:OfrendaListForm:datalist,:growl"  oncomplete="handleSubmit(args,'OfrendaEditDialog');"/>                               
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

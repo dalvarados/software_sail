@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">SAIL::: Sofware Administrativo de Iglesia Local</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body style="background-color: #dddddd">
+      
+        <p:growl id="growl" life="3000" />
+        
+                <h:form>  
+            <p:dialog id="dialog"  width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="true" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
+
+                    <h2>Sesion finalizada correctamente</h2>
+
+                <p:panelGrid columns="1" style="margin: 0 auto">
+                <p:commandLink  style="font-size: 12px;text-align: center  " value="Iniciar Sesion"  action="/index.xhtml?faces-redirect=true"/>
+                </p:panelGrid>
+            </p:dialog>
+          </h:form> 
+        
+       
+    </h:body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwReporteBautizadosCreateDlg" widgetVar="VwReporteBautizadosCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVwReporteBautizadosTitle}">
+            <h:form id="VwReporteBautizadosCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwReporteBautizadosController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_idPersona}" for="idPersona" />
+                        <p:inputText id="idPersona" value="#{vwReporteBautizadosController.selected.idPersona}" title="#{bundle.CreateVwReporteBautizadosTitle_idPersona}" />
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_fechaBautismo}" for="fechaBautismo" />
+                        <p:calendar id="fechaBautismo" pattern="MM/dd/yyyy" value="#{vwReporteBautizadosController.selected.fechaBautismo}" title="#{bundle.EditVwReporteBautizadosTitle_fechaBautismo}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText id="documentoIdentidad" value="#{vwReporteBautizadosController.selected.documentoIdentidad}" title="#{bundle.CreateVwReporteBautizadosTitle_documentoIdentidad}" required="true" requiredMessage="#{bundle.CreateVwReporteBautizadosRequiredMessage_documentoIdentidad}"/>
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{vwReporteBautizadosController.selected.nombre}" title="#{bundle.CreateVwReporteBautizadosTitle_nombre}" required="true" requiredMessage="#{bundle.CreateVwReporteBautizadosRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{vwReporteBautizadosController.selected.apellidos}" title="#{bundle.CreateVwReporteBautizadosTitle_apellidos}" required="true" requiredMessage="#{bundle.CreateVwReporteBautizadosRequiredMessage_apellidos}"/>
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_sexo}" for="sexo" />
+                        <p:inputText id="sexo" value="#{vwReporteBautizadosController.selected.sexo}" title="#{bundle.CreateVwReporteBautizadosTitle_sexo}" />
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_sellado}" for="sellado" />
+                        <p:inputText id="sellado" value="#{vwReporteBautizadosController.selected.sellado}" title="#{bundle.CreateVwReporteBautizadosTitle_sellado}" />
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_fechaMembreciaLocal}" for="fechaMembreciaLocal" />
+                        <p:calendar id="fechaMembreciaLocal" pattern="MM/dd/yyyy" value="#{vwReporteBautizadosController.selected.fechaMembreciaLocal}" title="#{bundle.EditVwReporteBautizadosTitle_fechaMembreciaLocal}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_estadoMembrecia}" for="estadoMembrecia" />
+                        <p:inputText id="estadoMembrecia" value="#{vwReporteBautizadosController.selected.estadoMembrecia}" title="#{bundle.CreateVwReporteBautizadosTitle_estadoMembrecia}" />
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_edad}" for="edad" />
+                        <p:inputText id="edad" value="#{vwReporteBautizadosController.selected.edad}" title="#{bundle.CreateVwReporteBautizadosTitle_edad}" />
+                        <p:outputLabel value="#{bundle.CreateVwReporteBautizadosLabel_clasificacion}" for="clasificacion" />
+                        <p:inputText id="clasificacion" value="#{vwReporteBautizadosController.selected.clasificacion}" title="#{bundle.CreateVwReporteBautizadosTitle_clasificacion}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vwReporteBautizadosController.create}" value="#{bundle.Save}" update="display,:VwReporteBautizadosListForm:datalist,:growl" oncomplete="handleSubmit(args,'VwReporteBautizadosCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VwReporteBautizadosCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

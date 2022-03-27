@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiezmoViewDlg" widgetVar="DiezmoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDiezmoTitle}">
+            <h:form id="DiezmoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{diezmoController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_fechaDiezmo}"/>
+                        <h:outputText value="#{diezmoController.selected.fechaDiezmo}" title="#{bundle.ViewDiezmoTitle_fechaDiezmo}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_valorDiezmo}"/>
+                        <h:outputText value="#{diezmoController.selected.valorDiezmo}" title="#{bundle.ViewDiezmoTitle_valorDiezmo}"/>
+                        <h:outputText value="Numero ingreso"/>
+                        <h:outputText value="#{diezmoController.selected.numIngreso}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_valorCorpenteUnida}"/>
+                        <h:outputText value="#{diezmoController.selected.valorCorpenteUnida}" title="#{bundle.ViewDiezmoTitle_valorCorpenteUnida}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_valorFondoLocal}"/>
+                        <h:outputText value="#{diezmoController.selected.valorFondoLocal}" title="#{bundle.ViewDiezmoTitle_valorFondoLocal}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_valorPastor}"/>
+                        <h:outputText value="#{diezmoController.selected.valorPastor}" title="#{bundle.ViewDiezmoTitle_valorPastor}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_idPersona}"/>
+                        <h:outputText value="#{diezmoController.selected.idPersona.nombre.concat(' ').concat(diezmoController.selected.idPersona.apellidos)}"  title="#{bundle.ViewDiezmoTitle_idPersona}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_idResponsablePpal}"/>
+                        <h:outputText value="#{diezmoController.selected.idResponsablePpal.nombre.concat(' ').concat(diezmoController.selected.idResponsablePpal.apellidos)}"  title="#{bundle.ViewDiezmoTitle_idResponsablePpal}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_idResponsableSec}"/>
+                        <h:outputText value="#{diezmoController.selected.idResponsableSec.nombre.concat(' ').concat(diezmoController.selected.idResponsableSec.apellidos)}" title="#{bundle.ViewDiezmoTitle_idResponsableSec}"/>
+                        <h:outputText value="#{bundle.ViewDiezmoLabel_idCuenta}"/>
+                        <h:outputText value="#{diezmoController.selected.idPuc.nombre}" title="#{bundle.ViewDiezmoTitle_idCuenta}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonaTitle}">
+            <h:form id="PersonaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{personaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonaLabel_fechaRegistro}"/>
+                        <h:outputText value="#{personaController.selected.fechaRegistro}" title="#{bundle.ViewPersonaTitle_fechaRegistro}">
+                        <f:convertDateTime pattern="dd/mm/yyyy" /></h:outputText>                        
+                        <h:outputText value="Tipo Documento"/>
+                        <h:outputText value="#{personaController.selected.tipoDocumento}" title="#{bundle.ViewPersonaTitle_documentoIdentidad}"/>                        
+
+                        <h:outputText value="#{bundle.ViewPersonaLabel_documentoIdentidad}"/>
+                        <h:outputText value="#{personaController.selected.documentoIdentidad}" title="#{bundle.ViewPersonaTitle_documentoIdentidad}"/>
+
+                        <h:outputText value="#{bundle.ViewPersonaLabel_nombre}"/>
+                        <h:outputText value="#{personaController.selected.nombre}" title="#{bundle.ViewPersonaTitle_nombre}"/>
+
+                        <h:outputText value="#{bundle.ViewPersonaLabel_direccion}"/>
+                        <h:outputText value="#{personaController.selected.direccion}" title="#{bundle.ViewPersonaTitle_direccion}"/>
+
+                        <h:outputText value="#{bundle.ViewPersonaLabel_telefono}"/>
+                        <h:outputText value="#{personaController.selected.telefono}" title="#{bundle.ViewPersonaTitle_telefono}"/>
+
+                        <h:outputText value="#{bundle.ViewPersonaLabel_numeroCelular}"/>
+                        <h:outputText value="#{personaController.selected.numeroCelular}" title="#{bundle.ViewPersonaTitle_numeroCelular}"/>
+
+                        <h:outputText value="Correo electronico"/>
+                        <h:outputText value="#{personaController.selected.correo}" title="Correo electronico" />                   
+
+                        <h:outputText value="Descripcion"/>
+                        <h:outputText value="#{personaController.selected.habilidades}"/>                   
+
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idRol}" />
+                        <h:outputText value="#{personaController.selected.idRolContable.nombreRol}"/>                                                
+
+                        <h:outputText value="clasificacion" />
+                        <h:outputText value="#{personaController.selected.idRolClasificacion.nombreRol}"/>                                                
+                        
+                        <h:outputText value="Ciudad"  />
+                        <h:outputText value="#{personaController.selected.idLugarNacimiento.nombreCiudad}"/>   
+                        
+                        </p:panelGrid>                      
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

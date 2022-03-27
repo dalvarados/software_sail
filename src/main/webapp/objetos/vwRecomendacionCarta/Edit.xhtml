@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwRecomendacionCartaEditDlg" widgetVar="VwRecomendacionCartaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVwRecomendacionCartaTitle}">
+            <h:form id="VwRecomendacionCartaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwRecomendacionCartaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_idPersona}" for="idPersona" />
+                        <p:inputText id="idPersona" value="#{vwRecomendacionCartaController.selected.idPersona}" title="#{bundle.EditVwRecomendacionCartaTitle_idPersona}" required="true" requiredMessage="#{bundle.EditVwRecomendacionCartaRequiredMessage_idPersona}"/>
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_dia}" for="dia" />
+                        <p:inputText id="dia" value="#{vwRecomendacionCartaController.selected.dia}" title="#{bundle.EditVwRecomendacionCartaTitle_dia}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_mes}" for="mes" />
+                        <p:inputText id="mes" value="#{vwRecomendacionCartaController.selected.mes}" title="#{bundle.EditVwRecomendacionCartaTitle_mes}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{vwRecomendacionCartaController.selected.anio}" title="#{bundle.EditVwRecomendacionCartaTitle_anio}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_tipoDocumento}" for="tipoDocumento" />
+                        <p:inputText id="tipoDocumento" value="#{vwRecomendacionCartaController.selected.tipoDocumento}" title="#{bundle.EditVwRecomendacionCartaTitle_tipoDocumento}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText id="documentoIdentidad" value="#{vwRecomendacionCartaController.selected.documentoIdentidad}" title="#{bundle.EditVwRecomendacionCartaTitle_documentoIdentidad}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{vwRecomendacionCartaController.selected.nombre}" title="#{bundle.EditVwRecomendacionCartaTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_nombreIglesia}" for="nombreIglesia" />
+                        <p:inputText id="nombreIglesia" value="#{vwRecomendacionCartaController.selected.nombreIglesia}" title="#{bundle.EditVwRecomendacionCartaTitle_nombreIglesia}" required="true" requiredMessage="#{bundle.EditVwRecomendacionCartaRequiredMessage_nombreIglesia}"/>
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{vwRecomendacionCartaController.selected.direccion}" title="#{bundle.EditVwRecomendacionCartaTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{vwRecomendacionCartaController.selected.telefono}" title="#{bundle.EditVwRecomendacionCartaTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_pastor}" for="pastor" />
+                        <p:inputText id="pastor" value="#{vwRecomendacionCartaController.selected.pastor}" title="#{bundle.EditVwRecomendacionCartaTitle_pastor}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_identificacionPastor}" for="identificacionPastor" />
+                        <p:inputText id="identificacionPastor" value="#{vwRecomendacionCartaController.selected.identificacionPastor}" title="#{bundle.EditVwRecomendacionCartaTitle_identificacionPastor}" />
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_nombreCiudad}" for="nombreCiudad" />
+                        <p:inputText id="nombreCiudad" value="#{vwRecomendacionCartaController.selected.nombreCiudad}" title="#{bundle.EditVwRecomendacionCartaTitle_nombreCiudad}" required="true" requiredMessage="#{bundle.EditVwRecomendacionCartaRequiredMessage_nombreCiudad}"/>
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_nombreDepartamento}" for="nombreDepartamento" />
+                        <p:inputText id="nombreDepartamento" value="#{vwRecomendacionCartaController.selected.nombreDepartamento}" title="#{bundle.EditVwRecomendacionCartaTitle_nombreDepartamento}" required="true" requiredMessage="#{bundle.EditVwRecomendacionCartaRequiredMessage_nombreDepartamento}"/>
+                        <p:outputLabel value="#{bundle.EditVwRecomendacionCartaLabel_nombrePais}" for="nombrePais" />
+                        <p:inputText id="nombrePais" value="#{vwRecomendacionCartaController.selected.nombrePais}" title="#{bundle.EditVwRecomendacionCartaTitle_nombrePais}" required="true" requiredMessage="#{bundle.EditVwRecomendacionCartaRequiredMessage_nombrePais}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vwRecomendacionCartaController.update}" value="#{bundle.Save}" update="display,:VwRecomendacionCartaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VwRecomendacionCartaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VwRecomendacionCartaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

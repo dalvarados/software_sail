@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PropositoCreateDlg" widgetVar="PropositoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePropositoTitle}">
+            <h:form id="PropositoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{propositoController.selected != null}">
+                     <p:outputLabel value="#{bundle.CreatePropositoLabel_nombreProposito}" for="nombreProposito" />
+                        <p:inputText id="nombreProposito" value="#{propositoController.selected.nombreProposito}" title="#{bundle.CreatePropositoTitle_nombreProposito}" required="true" requiredMessage="#{bundle.CreatePropositoRequiredMessage_nombreProposito}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{propositoController.create}" value="#{bundle.Save}" update="display,:PropositoListForm:datalist,:growl" oncomplete="handleSubmit(args,'PropositoCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

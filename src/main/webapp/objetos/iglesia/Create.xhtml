@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="IglesiaCreateDlg" widgetVar="IglesiaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateIglesiaTitle}">
+            <h:form id="IglesiaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{iglesiaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateIglesiaLabel_nombreIglesia}" for="nombreIglesia" />
+                        <p:inputText id="nombreIglesia" value="#{iglesiaController.selected.nombreIglesia}" title="#{bundle.CreateIglesiaTitle_nombreIglesia}" required="true" requiredMessage="#{bundle.CreateIglesiaRequiredMessage_nombreIglesia}"/>
+                        <p:outputLabel value="#{bundle.CreateIglesiaLabel_idCiudad}" for="idCiudad" />
+                        <p:selectOneMenu id="idCiudad" value="#{iglesiaController.selected.idCiudad}" >
+                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
+                                           var="idCiudadItem"
+                                           itemValue="#{idCiudadItem}" itemLabel="#{idCiudadItem.nombreCiudad}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateIglesiaLabel_idTipoIglesia}" for="idTipoIglesia" />
+                        <p:selectOneMenu id="idTipoIglesia" value="#{iglesiaController.selected.tipoIglesia}" >
+                        <f:selectItem itemLabel="Externa" itemValue="Externa" />                        
+                        <f:selectItem itemLabel="Local" itemValue="Local" />                        
+                        </p:selectOneMenu>
+                        <p:outputLabel value="Pastor" for="pastor" />
+                        <p:inputText id="pastor" value="#{iglesiaController.selected.pastor}"/>
+                        <p:outputLabel value="Direccion" for="direccion" />
+                        <p:inputText id="direccion" value="#{iglesiaController.selected.direccion}"/>
+                        <p:outputLabel value="Telefono" for="telefono" />
+                        <p:inputText id="telefono" value="#{iglesiaController.selected.telefono}"/>                        
+                        <p:outputLabel value="Correo" for="correo" />
+                        <p:inputText id="correo" value="#{iglesiaController.selected.correo}"/>                        
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{iglesiaController.create}" value="#{bundle.Save}" update="display,:IglesiaListForm:datalist,:growl" oncomplete="handleSubmit(args,'IglesiaCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

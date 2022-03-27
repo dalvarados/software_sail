@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
+        <p:dialog id="Calculadora" widgetVar="Calculadora"  modal="false" resizable="false" > 
+            <h:form id="calculadoraForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Cantidad de Billete de 100.000 " for="Billete100" />
+                        <p:inputText id="Billete100" value="#{calculadoraBean.numBillete100}"  />
+                        
+                        <p:outputLabel value="Cantidad de Billete de 50.000 " for="Billete50" />
+                        <p:inputText id="Billete50" value="#{calculadoraBean.numBillete50}"  />
+
+                        <p:outputLabel value="Cantidad de Billete de 20.000 " for="Billete20" />
+                        <p:inputText id="Billete20" value="#{calculadoraBean.numBillete20}"  />                        
+                        
+                        <p:outputLabel value="Cantidad de Billete de 10.000 " for="Billete10" />
+                        <p:inputText id="Billete10" value="#{calculadoraBean.numBillete10}"  />
+                        
+                        <p:outputLabel value="Cantidad de Billete de 5.000 " for="Billete5" />
+                        <p:inputText id="Billete5" value="#{calculadoraBean.numBillete5}"  />
+
+                        <p:outputLabel value="Cantidad de Billete de 2.000 " for="Billete2" />
+                        <p:inputText id="Billete2" value="#{calculadoraBean.numBillete2}"  />
+
+                        <p:outputLabel value="Cantidad de Billete de 1.000 " for="Billete1" />
+                        <p:inputText id="Billete1" value="#{calculadoraBean.numBillete1}"  />
+
+                        <p:outputLabel value="Valor de Monedas " for="Monedas" />
+                        <p:inputText id="Monedas" value="#{calculadoraBean.monedas}"  />                        
+                        
+                        <p:commandButton  id="cal" value="Calcular"  actionListener="#{calculadoraBean.calcular}"     update="valor"   />
+                        <h:outputText  id="valor" value="#{calculadoraBean.resultado}" >
+                                          <f:convertNumber pattern="###,###" currencySymbol="$" type="currency"/> 
+                                         </h:outputText> 
+                    </p:panelGrid>
+                </h:panelGroup>
+                                               
+            </h:form>
+
+        </p:dialog>
+
+</html>

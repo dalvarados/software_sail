@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="VwRecomendacionCartaListForm">
+                <p:panel header="#{bundle.ListVwRecomendacionCartaTitle}">
+                    <p:dataTable id="datalist" value="#{vwRecomendacionCartaController.list_carta}" var="item"
+                                 selectionMode="single" selection="#{vwRecomendacionCartaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idPersona}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_idPersona}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_dia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_mes}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.mes}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_anio}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.anio}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_tipoDocumento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoDocumento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_documentoIdentidad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.documentoIdentidad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_nombreIglesia}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreIglesia}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_direccion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.direccion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_telefono}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefono}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_pastor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pastor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_identificacionPastor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.identificacionPastor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_nombreCiudad}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreCiudad}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_nombreDepartamento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreDepartamento}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListVwRecomendacionCartaTitle_nombrePais}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombrePais}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{vwRecomendacionCartaController.prepareCreate}" update=":VwRecomendacionCartaCreateForm" oncomplete="PF('VwRecomendacionCartaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":VwRecomendacionCartaViewForm" oncomplete="PF('VwRecomendacionCartaViewDialog').show()" disabled="#{empty vwRecomendacionCartaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":VwRecomendacionCartaEditForm" oncomplete="PF('VwRecomendacionCartaEditDialog').show()" disabled="#{empty vwRecomendacionCartaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{vwRecomendacionCartaController.destroy}" update=":growl,datalist" disabled="#{empty vwRecomendacionCartaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

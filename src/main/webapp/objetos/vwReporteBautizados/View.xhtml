@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwReporteBautizadosViewDlg" widgetVar="VwReporteBautizadosViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVwReporteBautizadosTitle}">
+            <h:form id="VwReporteBautizadosViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwReporteBautizadosController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_idPersona}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.idPersona}" title="#{bundle.ViewVwReporteBautizadosTitle_idPersona}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_fechaBautismo}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.fechaBautismo}" title="#{bundle.ViewVwReporteBautizadosTitle_fechaBautismo}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_documentoIdentidad}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.documentoIdentidad}" title="#{bundle.ViewVwReporteBautizadosTitle_documentoIdentidad}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_nombre}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.nombre}" title="#{bundle.ViewVwReporteBautizadosTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_apellidos}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.apellidos}" title="#{bundle.ViewVwReporteBautizadosTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_sexo}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.sexo}" title="#{bundle.ViewVwReporteBautizadosTitle_sexo}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_sellado}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.sellado}" title="#{bundle.ViewVwReporteBautizadosTitle_sellado}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_fechaMembreciaLocal}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.fechaMembreciaLocal}" title="#{bundle.ViewVwReporteBautizadosTitle_fechaMembreciaLocal}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_estadoMembrecia}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.estadoMembrecia}" title="#{bundle.ViewVwReporteBautizadosTitle_estadoMembrecia}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_edad}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.edad}" title="#{bundle.ViewVwReporteBautizadosTitle_edad}"/>
+                        <h:outputText value="#{bundle.ViewVwReporteBautizadosLabel_clasificacion}"/>
+                        <h:outputText value="#{vwReporteBautizadosController.selected.clasificacion}" title="#{bundle.ViewVwReporteBautizadosTitle_clasificacion}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VwReporteBautizadosViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

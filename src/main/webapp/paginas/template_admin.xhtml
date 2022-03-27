@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>
+            <ui:insert name="title">SAIL::: Sofware Administrativo de Iglesia Local</ui:insert>
+        </title>
+        <f:event type="preRenderView" listener="#{plantillaController.verificarSesion()}"/> 
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+    </h:head>
+
+    <h:body>
+
+        <p:growl id="growl" life="3000" />
+
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north"  size="65" header="#{iglesiaController.obtener_iglesiaLocal()}">
+                <h:form id="menuForm">
+                    <p:menubar autoDisplay="false">
+                        <p:menuitem  value="#{bundle.Home}" outcome="/paginas/principal.xhtml" icon="ui-icon-home"/>
+                          <p:submenu label="#{bundle.Maintenance}">
+                            <p:menuitem value="Barrio" outcome="/objetos/barrio/List.xhtml" />
+                            <p:menuitem value="Ciudad" outcome="/objetos/ciudad/List.xhtml" />
+                            <p:menuitem value="Comite" outcome="/objetos/comite/List.xhtml" />                            
+                            <p:menuitem value="Iglesia" outcome="/objetos/iglesia/List.xhtml" />
+                            <p:menuitem value="Ocupacion" outcome="/objetos/ocupacion/List.xhtml" />
+                            <p:menuitem value="Pais" outcome="/objetos/pais/List.xhtml" />
+                            <p:menuitem value="Rol" outcome="/objetos/rol/List.xhtml" />
+                            <p:menuitem value="Usuario" outcome="/objetos/usuario/List.xhtml" /> 
+                            <p:menuitem value="Propositos" outcome="/objetos/proposito/List.xhtml" />
+                            <p:menuitem value="Cuentas" outcome="/objetos/cuenta/List.xhtml" />
+                            <p:menuitem value="Bancos" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Porcentajes" outcome="/paginas/paginaConstruccion" />                             
+                            </p:submenu> 
+                        <p:submenu label="Tesorería">
+                            <p:submenu label="Ofrenda"> 
+                            <p:menuitem value="Registrar Ofrenda" outcome="/objetos/ofrenda/List.xhtml" />
+                            <p:menuitem value="Reporte Mensual" outcome="/objetos/vwOfrendaMensual/List.xhtml" />
+                            </p:submenu>  
+                            <p:submenu label="Diezmo"> 
+                            <p:menuitem value="Registrar Diezmo" outcome="/objetos/diezmo/List.xhtml" />
+                            <p:menuitem value="Reporte Mensual" outcome="/objetos/vwDiezmoMensual/List.xhtml" />
+                            </p:submenu> 
+
+                            <p:submenu label="Contabilidad"> 
+                            <p:menuitem value="Registrar Ingresos" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Registrar Egresos" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Transferecias" outcome="/paginas/paginaConstruccion"/> 
+                            <p:menuitem value="Presupuesto" outcome="/paginas/paginaConstruccion"/>                             
+                            <p:menuitem value="Libro Auxiliar" outcome="/paginas/paginaConstruccion"/> 
+                            </p:submenu>  
+
+                            <p:submenu label="Reportes"> 
+                            <p:menuitem value="Cuenta principal" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Ofrenda" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Diezmos" outcome="/paginas/paginaConstruccion"/> 
+                            <p:menuitem value="Presupuesto" outcome="/paginas/paginaConstruccion"/> 
+                            </p:submenu>  
+
+                            <p:menuitem value="Otros Ingresos" outcome="/paginas/paginaConstruccion" />                            
+                            <p:menuitem value="Calculadora"  oncomplete="PF('Calculadora').show()"   />  
+                            
+                        
+                        </p:submenu>
+                        <p:submenu label="Secretaría">
+                            <p:submenu label="Registros"> 
+                            <p:menuitem value="Personas" outcome="/objetos/persona/List.xhtml" />
+                            <p:menuitem value="Bautismos" outcome="/objetos/persona/List_bautismo.xhtml" />                            
+                            <p:menuitem value="Cambio de Membresia" outcome="/objetos/persona/List_inactivo.xhtml" />                             
+                            <p:menuitem value="Matrimonios" outcome="/objetos/matrimonio/List.xhtml" />                            
+                            <p:menuitem value="Defunciones" outcome="/objetos/defunciones/List.xhtml" />                              
+                            <p:menuitem value="Inventario" outcome="/objetos/inventario/List.xhtml" />   
+                            </p:submenu> 
+                            <p:submenu label="Certificaciones"> 
+                            <p:menuitem value="Bautismo" outcome="/reportes/bautismoReporte.xhtml" />
+                            <p:menuitem value="Matrimonio" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Membresia" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Recomendaciones" outcome="/paginas/paginaConstruccion" />   
+                            </p:submenu>                              
+                            <p:submenu label="Informes"> 
+                            <p:menuitem value="Personas" outcome="/objetos/persona/List_export.xhtml" /> 
+                            <p:menuitem value="Agenda" outcome="/reportes/AgendaReporte.xhtml" />    
+                            <p:menuitem value="Visitas" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Bautizados" outcome="/objetos/vwReporteBautizados/List.xhtml" />
+                            <p:menuitem value="Cambio de Membresia" outcome="/paginas/paginaConstruccion" />
+                            <p:menuitem value="Asistencia" outcome="/objetos/vwAsistenciaMensual/List.xhtml" />   
+                            </p:submenu>   
+
+                            <p:submenu label="Documentos"> 
+                            <p:menuitem value="Cartas recomendacion" outcome="/objetos/archivos/subirArchivos_cartaReco" />
+                            <p:menuitem value="Cartas de Membresia" outcome="/objetos/archivos/subirArchivos_cartaMemb" />                            
+                            <p:menuitem value="Registro de Bautismos" outcome="/objetos/archivos/subirArchivos_regBautismo" />                            
+                            <p:menuitem value="Planes de trabajo" outcome="/paginas/paginaConstruccion" />                             
+                            </p:submenu> 
+
+                            <p:submenu label="Servicio"> 
+                            <p:menuitem value="Miembros de Grupos" outcome="/paginas/paginaConstruccion" />                           
+                            <p:menuitem value="Miembros de Comites" outcome="/paginas/paginaConstruccion" />  
+                            <p:menuitem value="Discipulado" outcome="/paginas/paginaConstruccion" />                             
+                            </p:submenu>                             
+
+                        <p:submenu label="Eventos">
+                            <p:menuitem value="Agenda" outcome="/objetos/calendario/List.xhtml"  />                           
+                            <p:submenu label="Campamento">
+                            <p:menuitem value="Administrar" outcome="/paginas/paginaConstruccion" />                                  
+                            <p:menuitem value="Inscripciones" outcome="/paginas/paginaConstruccion" />                           
+                            <p:menuitem value="Informes" outcome="/paginas/paginaConstruccion" />                                                     
+                        </p:submenu>                        
+                        </p:submenu>
+                            
+                            <p:menuitem value="Asistencia" outcome="/objetos/asistencia/List.xhtml" />    
+                            <p:menuitem value="Tablero de control" outcome="/paginas/paginaConstruccion" />                             
+                        </p:submenu>
+
+                        <p:menuitem value="Acerca de" outcome="/paginas/paginaConstruccion"/>
+                        
+                    </p:menubar>
+
+                </h:form>
+                                <table  border="0" cellpadding="2" cellspacing="5" width="100%">
+                <tbody>
+                    
+                    <td width="60%" > </td>
+                    
+                    <td ><label style="font-size: 12px">Bienvenido(a):</label></td>
+                    <td><h:outputText style="font-size: 12px" value="#{usuarioController.usuario_logeado().nombre}" /></td>
+                     <td width="5"><label></label></td>
+                     <td><h:form> <p:commandLink   style="font-size: 12px" value="Cerrar Sesion" actionListener="#{plantillaController.cerrarSesion()}" action="/paginas/sesionFinalizada.xhtml?faces-redirect=true"/></h:form></td>
+                    </tbody>
+                </table>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" size="600" >
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+
+</html>

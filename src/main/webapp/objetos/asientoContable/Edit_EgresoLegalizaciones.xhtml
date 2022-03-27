@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <a href="Create_Egreso.xhtml"></a>
+    <ui:composition>
+
+        <p:dialog id="AsientoContableEgresoLegalizacionesEditDlg" closable="false" widgetVar="AsientoContableEgresoLegalizacionesEditDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Egreso por legalizar">
+            <h:form id="AsientoContableEgresoLegalizacionesEditarForm">
+                <h:panelGroup id="display">
+                    
+                    <p:panelGrid columns="4" rendered="#{asientoContableController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:inputText style="width: 155px"  readonly="true" disabled="#{asientoContableController.selected.anulado eq  1}"
+                                     id="fechaRegistro" value="#{asientoContableController.selected.fechaTipoContable}">
+                           <f:convertDateTime pattern="dd/MM/yyyy" type="date" /></p:inputText>
+
+                        <p:outputLabel value="Numero Ingreso" for="numeroTipoContable" />
+                        <p:inputText style="width: 163px"  readonly="true" id="numeroTipoContable" disabled="#{asientoContableController.selected.anulado eq  1}"
+                                     value="#{asientoContableController.selected.numeroTipoContable}" title="#{bundle.CreateAsientoContableTitle_numeroTipoContable}" />
+
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_valorDebito}" for="valorDebito" />
+                        <p:inputText id="valorDebito"  readonly="true" value="#{asientoContableController.selected.valorCredito}" 
+                                     disabled="#{asientoContableController.selected.anulado eq  1}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_idTercero}" for="idTercero" />
+                        <p:selectOneMenu filter="true" filterMatchMode="startsWith" style="width: 148px" 
+                                         id="idTercero" value="#{asientoContableController.selected.idTercero}" 
+                                         disabled="#{asientoContableController.selected.anulado eq  1}">
+                            <f:selectItems value="#{asientoContableController.rol_tercero}"
+                                           var="idTerceroItem" 
+                                           itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
+                        </p:selectOneMenu> 
+                                                
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_descripcion}" for="descripcion" />
+                        <p:inputTextarea   readonly="true" id="descripcion" value="#{asientoContableController.selected.descripcion}" disabled="#{asientoContableController.selected.anulado eq  1}" />
+                       
+                    </p:panelGrid>  
+                    <p:commandButton disabled="#{asientoContableController.selected.anulado eq  1}" value="Anular" 
+                                     actionListener="#{asientoContableController.anular_asientocontableEgreso}" 
+                                     update="display,:AsientoContableEgresoLegalizacionesListForm:datalist,:growl"
+                                     onclick="return confirm('Esta seguro de eliminar este registro ?')"
+                                     oncomplete="handleSubmit(args,'AsientoContableEgresoLegalizacionesEditDialog');">
+                      </p:commandButton>                                              
+                    <p:commandButton value="Cerrar" oncomplete="handleSubmit(args,'AsientoContableEgresoLegalizacionesEditDialog');"/>                                  
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

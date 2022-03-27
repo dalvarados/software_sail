@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InventarioEditDlg" widgetVar="InventarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInventarioTitle}">
+            <h:form id="InventarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{inventarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{inventarioController.selected.nombre}" title="#{bundle.CreateInventarioTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_precioUnitario}" for="precioUnitario" />
+                        <p:inputText id="precioUnitario" value="#{inventarioController.selected.precioUnitario}" title="#{bundle.CreateInventarioTitle_precioUnitario}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_cantidad}" for="cantidad" />
+                        <p:inputText id="cantidad" value="#{inventarioController.selected.cantidad}" title="#{bundle.CreateInventarioTitle_cantidad}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_precioTotal}" for="precioTotal" />
+                        <p:inputText id="precioTotal" value="#{inventarioController.selected.precioTotal}" title="#{bundle.CreateInventarioTitle_precioTotal}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_marca}" for="marca" />
+                        <p:inputText id="marca" value="#{inventarioController.selected.marca}" title="#{bundle.CreateInventarioTitle_marca}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_fechaAdquisicion}" for="fechaAdquisicion" />
+                        <p:calendar id="fechaAdquisicion" pattern="dd/MM/yyyy" value="#{inventarioController.selected.fechaAdquisicion}" title="#{bundle.EditInventarioTitle_fechaAdquisicion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_propio}" for="propio" />
+                        <p:inputText id="propio" value="#{inventarioController.selected.propio}" title="#{bundle.CreateInventarioTitle_propio}" />
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_condicion}" for="condicion" />
+                        <p:selectOneMenu id="condicion" value="#{inventarioController.selected.condicion}">
+                        <f:selectItem itemLabel="Buen estado" itemValue="Buen Estado" />
+                        <f:selectItem itemLabel="Mal estado" itemValue="Mal Estado" />
+                        <f:selectItem itemLabel="Regular estado" itemValue="Regular Estado" />
+                        </p:selectOneMenu> 
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_idComite}" for="idComite" />
+                        <p:selectOneMenu id="idComite" value="#{inventarioController.selected.idComite}" >
+                            <f:selectItems value="#{comiteController.itemsAvailableSelectOne}"
+                                           var="idComiteItem"
+                                           itemValue="#{idComiteItem}" itemLabel="#{idComiteItem.nombreComite}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu id="idPersona" value="#{inventarioController.selected.idPersona}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}" itemLabel="#{idPersonaItem.nombre.concat(' ').concat(idPersonaItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_estado}" for="estado" />
+                        <p:selectOneMenu id="estado" value="#{inventarioController.selected.estado}">
+                        <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                        <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        </p:selectOneMenu> 
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_fechaBaja}" for="fechaBaja" />
+                        <p:calendar id="fechaBaja" pattern="dd/MM/yyyy" value="#{inventarioController.selected.fechaBaja}" title="#{bundle.EditInventarioTitle_fechaBaja}"  showOn="button"/>
+                        </p:panelGrid>
+                    <br></br>
+                       <p:panelGrid columns="2" rendered="#{inventarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateInventarioLabel_observaciones}" for="observaciones" />
+                        <p:inputTextarea style="width: 465px" id="observaciones" value="#{inventarioController.selected.observaciones}" title="#{bundle.CreateInventarioTitle_observaciones}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inventarioController.update}" value="#{bundle.Save}" update="display,:InventarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InventarioEditDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

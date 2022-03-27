@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="LegalizacionesCreateDlg" widgetVar="LegalizacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateLegalizacionesTitle}">
+            <h:form id="LegalizacionesCreateForm">
+                <h:panelGroup id="display">                    
+                    <p:panelGrid columns="6" rendered="#{legalizacionesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar  size="10" id="fechaRegistro" pattern="dd/MM/yyyy" value="#{legalizacionesController.selected.fechaRegistro}" title="#{bundle.EditAsientoContableTitle_fechaRegistro}"  showOn="button"/>
+
+                        <p:outputLabel value="Egreso" for="egresoLegalizacion" />
+                        <p:selectOneMenu filter="true" filterMatchMode="startsWith" 
+                                         style="width: 170px" id="egresoLegalizacion" value="#{legalizacionesController.selected.idAsiento}">
+                            <f:selectItems value="#{legalizacionesController.list_legalizacion}"
+                                           var="egresoLegalizacionItem"
+                                           itemValue="#{egresoLegalizacionItem}" itemLabel="#{egresoLegalizacionItem.numeroTipoContable}"/>                        
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel value="Tercero" for="idTercero" />
+                        <p:selectOneMenu filter="true" filterMatchMode="startsWith" style="width: 170px" 
+                                         id="idTercero" value="#{legalizacionesController.selected.idTercero}" >
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItems value="#{legalizacionesController.rol_tercero}"
+                                           var="idTerceroItem"
+                                           itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
+                        </p:selectOneMenu>                        
+                        
+                        <p:outputLabel value="N° Legalizacion" for="numeroTipoContable" />
+                        <p:inputText disabled="true" style="width: 90px" id="numeroTipoContable" value="#{legalizacionesController.selected.numeroTipoContable}" title="#{bundle.CreateAsientoContableTitle_numeroTipoContable}" />
+
+                        <p:outputLabel value="Cuenta" for="idPuc" />
+                        <p:selectOneMenu  filter="true" filterMatchMode="startsWith" style="width: 170px" id="idPuc" value="#{legalizacionesController.selected.idPuc}" >                                                                 
+                        <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItems  value="#{cuentasPucController.list_obtener_cuentas_favoritas}"                                        
+                                           var="idPucItem" 
+                                           itemValue="#{idPucItem}" itemLabel="#{idPucItem.nombre} "/>
+                        </p:selectOneMenu>                        
+                        
+                        <p:outputLabel  for="tipovalor" value="Tipo" />
+                        <h:panelGrid columns="2" >
+                        <p:selectOneRadio  id="tipovalor" value = "#{asientoContableController.tipoValor}">
+                        <f:selectItem itemLabel="Debito" itemValue="DB" />
+                        <f:selectItem itemLabel="Credito" itemValue="CR" />
+                       </p:selectOneRadio>
+                        </h:panelGrid>
+                        
+                        <p:outputLabel value="Doc Referencia" for="docReferencia" />                       
+                        <p:inputText style="width: 90px" id="docReferencia" value="#{legalizacionesController.selected.docReferencia}" />
+                        
+                        <p:outputLabel value="Valor" for="valorDebito" />
+                        <p:inputText style="width: 185px" id="valorDebito" value="#{legalizacionesController.selected.valorDebito}" title="#{bundle.CreateAsientoContableTitle_valorDebito}" />                        
+                        
+                        <p:outputLabel value="Descripcion" for="descripcion" />
+                        <p:inputTextarea style="width: 210px" id="descripcion" value="#{legalizacionesController.selected.descripcion}" title="#{bundle.CreateAsientoContableTitle_descripcion}" />
+                    </p:panelGrid>
+
+                  <p:panelGrid columns="10">
+                    <p:outputLabel style="font-weight:bold" value="Saldo Fondo "/>
+                    <h:outputLabel value="#{asientoContableController.saldoFondoLocal}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                    <p:outputLabel style="font-weight:bold" value="Debitos " />
+                    <h:outputLabel value="#{asientoContableController.debito}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                    <p:outputLabel style="font-weight:bold" value="Creditos " />
+                    <h:outputLabel value="#{asientoContableController.credito}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                    <p:outputLabel style="font-weight:bold" value="Diferencia " />
+                    <h:outputLabel value="#{asientoContableController.diferencia}"><f:convertNumber pattern="$##,###" /></h:outputLabel>
+                
+                        
+                <p:commandButton  value="Agregar" >
+                </p:commandButton>                    
+                    <p:commandButton   value="Cerrar" >
+                        <p:confirm  id="genericDialogConfirm71"  header="Alerta"   message="Si el documento no esta cuadrado,se ignoran los datos ingresado"   
+                            icon="ui-icon-alert" >                                          
+                        </p:confirm> 
+                    </p:commandButton>   
+                        <p:confirmDialog  id="genericDialogConfirm71" global="true" showEffect="fade" hideEffect="fade"  closable="false" 
+					widgetVar="wvDialogConfirm" >
+                            <p:commandButton value="Yes" type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-closethick" />
+                        </p:confirmDialog>                    
+                </p:panelGrid>         
+                    
+                    
+                    <p:commandButton actionListener="#{legalizacionesController.create}" value="#{bundle.Save}" update="display,:LegalizacionesListForm:datalist,:growl" oncomplete="handleSubmit(args,'LegalizacionesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" oncomplete="handleSubmit(args,'LegalizacionesCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

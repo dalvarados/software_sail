@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CuentasPucCreateDlg" widgetVar="CuentasPucCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCuentasPucTitle}">
+            <h:form id="CuentasPucCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{cuentasPucController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCuentasPucLabel_codigoCuenta}" for="codigoCuenta" />
+                        <p:inputText id="codigoCuenta" value="#{cuentasPucController.selected.codigoCuenta}" title="#{bundle.CreateCuentasPucTitle_codigoCuenta}" />
+                        <p:outputLabel value="#{bundle.CreateCuentasPucLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{cuentasPucController.selected.nombre}" title="#{bundle.CreateCuentasPucTitle_nombre}" />
+                        <p:outputLabel value="Favoritos"  />                      
+                        <p:selectBooleanCheckbox   value="#{cuentasPucController.selected.flag}" >
+                        </p:selectBooleanCheckbox >
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{cuentasPucController.create}" value="#{bundle.Save}" update="display,:CuentasPucListForm:datalist,:growl" oncomplete="handleSubmit(args,'CuentasPucCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" update="display,:CuentasPucListForm:datalist,:growl" oncomplete="handleSubmit(args,'CuentasPucCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

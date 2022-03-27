@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="AsientoContableEditDetalleDlg" widgetVar="AsientoContableEditDetalleDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAsientoContableTitle}">
+            <h:form id="AsientoContableEditDetalleForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{asientoContableController.selectedDetalle != null}">
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{asientoContableController.selectedDetalle.descripcion}" />
+                        <p:outputLabel value="Doc Referencia" for="docReferencia" />                       
+                        <p:inputText id="docReferencia" value="#{asientoContableController.selectedDetalle.docReferencia}" />                       
+                        <p:outputLabel value="Debito" for="valorDebito" />
+                        <p:inputText id="valorDebito" disabled="#{empty asientoContableController.selectedDetalle.valorDebito}" value="#{asientoContableController.selectedDetalle.valorDebito}" />                                           
+                        <p:outputLabel value="Credito" for="valorCredito" />
+                        <p:inputText id="valorCredito"  disabled="#{empty asientoContableController.selectedDetalle.valorCredito}" value="#{asientoContableController.selectedDetalle.valorCredito}" />                                           
+
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{asientoContableController.updateDocumentoContable}" value="#{bundle.Save}" update="display,:AsientoContableIngresoListForm:datalist AsientoContableIngresoCreateForm:display :AsientoContableIngresoCreateForm:datalistCreateAsientos,:growl"  oncomplete="handleSubmit(args,'AsientoContableEditDetalleDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" update="display,:AsientoContableIngresoListForm:datalist :AsientoContableIngresoCreateForm:datalistCreateAsientos,:growl" oncomplete="handleSubmit(args,'AsientoContableEditDetalleDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+</html>

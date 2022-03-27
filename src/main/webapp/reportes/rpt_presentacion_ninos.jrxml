@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpt_presentacion_ninos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e2ecca3c-3958-4f1c-adf0-6e098fb286d7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="62"/>
+	<field name="nombreIglesia" class="java.lang.String"/>
+	<field name="fechaRegistro" class="java.util.Date"/>
+	<field name="nombreCiudad" class="java.lang.String"/>
+	<field name="nombreDepartamento" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="fechaNacimiento" class="java.util.Date"/>
+	<field name="documentoIdentidad" class="java.lang.String"/>
+	<field name="nombrePadres" class="java.lang.String"/>
+	<field name="fechaInicio" class="java.util.Date"/>
+	<field name="descripcionEvento" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="85" y="0" width="411" height="34" uuid="8493e8ec-eca8-4b06-8925-3670cfc7f90b"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[IGLESIA PENTECOSTAL UNIDA DE COLOMBIA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="97" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="11" width="342" height="20" uuid="6cd2cd8f-48df-42de-9374-03dedeb6a40e"/>
+				<text><![CDATA[Personeria juridica especial 1032 ministerio del interior /www.ipuc.org.co]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="158" y="55" width="256" height="20" uuid="d382e7f6-3d51-4955-886f-f357e28d8524"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Registro de presentacion de niños]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="408" splitType="Stretch">
+			<textField>
+				<reportElement x="25" y="25" width="212" height="20" uuid="2bb92152-5fe6-42a9-b0e6-f1f6d8d542d4"/>
+				<textFieldExpression><![CDATA[$F{nombreIglesia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="26" y="78" width="100" height="20" uuid="6badc08c-b349-44b7-8bd4-541b6e7a2775"/>
+				<textFieldExpression><![CDATA[$F{fechaRegistro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="25" y="3" width="182" height="20" uuid="0398386b-8d4e-492d-b777-11039d52008e"/>
+				<text><![CDATA[Nombre de la congregacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="25" y="54" width="109" height="20" uuid="2c7c604a-b0ef-4ea0-bddb-deebbc5bf8ca"/>
+				<text><![CDATA[Fecha de inscripcion]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="168" y="139" width="100" height="20" uuid="9b080204-491e-40c1-a739-e4d88771196d"/>
+				<textFieldExpression><![CDATA[$F{nombreCiudad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="139" width="161" height="20" uuid="3370de8d-cfcf-4d6e-a9cc-4f431bf6f6fc"/>
+				<textFieldExpression><![CDATA[$F{nombreDepartamento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="139" width="78" height="20" uuid="e12e7b28-6ee5-486d-99d0-d5181babf7c5"/>
+				<text><![CDATA[Municipio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="139" width="78" height="20" uuid="af6e340c-e471-4514-b7a7-4d173d69fb45"/>
+				<text><![CDATA[y departamento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="168" y="164" width="100" height="20" uuid="c2cd94c0-abb8-461c-952b-cbec587e5af3"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="253" y="164" width="100" height="20" uuid="e4db68db-8e1c-4334-a8b2-ee6fe07af874"/>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="164" width="45" height="20" uuid="918492d3-c67e-448a-b1c3-8ac933efbd06"/>
+				<text><![CDATA[nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="85" y="164" width="47" height="20" uuid="92d328f1-cbf3-4044-861e-31006a12aef4"/>
+				<text><![CDATA[apellidos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="170" y="272" width="100" height="20" uuid="7d94316b-3bd1-4937-b7fd-689e6a808223"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="34" y="272" width="100" height="20" uuid="35a437a6-fb26-49d7-80fa-cf6c269dc6c4"/>
+				<text><![CDATA[Fecha presentacion]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="163" y="335" width="280" height="58" uuid="17440067-d24c-48a9-a08f-bc5173788ee0"/>
+				<textFieldExpression><![CDATA[$F{descripcionEvento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="335" width="100" height="20" uuid="f467843c-c92c-4e1f-86b0-c5cb70d87b36"/>
+				<text><![CDATA[Observacion: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="168" y="188" width="100" height="20" uuid="a287172a-ec59-4e15-9390-d36ff61e7f15"/>
+				<textFieldExpression><![CDATA[$F{fechaNacimiento}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="188" width="100" height="20" uuid="0e5e6051-1953-4e62-9e7e-a764372f8e47"/>
+				<text><![CDATA[fechaNacimiento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="168" y="212" width="138" height="20" uuid="f1a86a6a-d357-4685-ad3f-299a97c800c4"/>
+				<textFieldExpression><![CDATA[$F{documentoIdentidad}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="214" width="100" height="20" uuid="ae5f9611-c70b-4424-995f-fb724ab2270a"/>
+				<text><![CDATA[documentoIdentidad]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="168" y="244" width="232" height="20" uuid="a50d11c6-244e-4231-a8b6-816850e38927"/>
+				<textFieldExpression><![CDATA[$F{nombrePadres}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="33" y="243" width="100" height="20" uuid="ef749a55-b263-424c-8bef-9840e127eac4"/>
+				<text><![CDATA[nombrePadres]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

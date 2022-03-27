@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    
+<ui:composition template="#{usuarioController.templateDinamico()}">
+        
+<ui:define name="body">
+     <h:panelGrid columns="4" >
+        <h:form id="form">
+             <br></br><br></br>
+             <p:panel style="width:650px;" header="Agenda">
+             <br></br><br></br><br></br>
+             <p:outputLabel value="Fecha Inicio"/>
+             <p:calendar value="#{calendarioController.calendario.fechaInicio}" pattern="yyyy/MM/dd" />                                                         
+             <p:outputLabel value="Fecha Fin"/>
+             <p:calendar value="#{calendarioController.calendario.fechaFin}" pattern="yyyy/MM/dd" />
+             <br></br>
+             <p:commandButton id="start" type="button" onclick="start()" widgetVar="startButton1" value="Buscar" actionListener="#{personaReportBean.obtener_lista_personaReport()}">              
+             </p:commandButton>
+             <br/><br/>
+              <p:progressBar id="progressBarClient" widgetVar="pbClient" style="width:300px"/>
+             <br></br><br></br>
+             <h:panelGrid columns="4" >
+             <p:commandButton   id="export" value="Descargar" actionListener="#{personaReportBean.exportarPDF()}" ajax="false" onclick="form.target='_blank'"/>  
+            <br></br>
+            <p:commandButton  id="ver"  value="Visualizar" actionListener="#{personaReportBean.verPDF()}" ajax="false" onclick="form.target='_blank'"/> 
+        </h:panelGrid>
+             </p:panel>
+        </h:form>
+            <h:graphicImage  library="imagenes"  style="width: 620px; height: 500px;" name="chapinero2.png"/>  
+        <script type="text/javascript">
+            function start() {
+            PF('startButton1').disable();
+            window['progress'] = setInterval(function() {
+            var pbClient = PF('pbClient'),
+            oldValue = pbClient.getValue(),
+            newValue = oldValue + 50;
+            pbClient.setValue(pbClient.getValue() + 50);            
+                if(newValue === 150) {
+                clearInterval(window['progress']);
+                PF('pbClient').setValue(0);
+                PF('startButton1').enable();
+                } 
+            }, 1000);
+
+        }
+
+       </script>
+    </h:panelGrid>
+    
+  </ui:define>
+</ui:composition>
+
+</html>

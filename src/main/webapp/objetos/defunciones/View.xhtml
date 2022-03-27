@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DefuncionesViewDlg" widgetVar="DefuncionesViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewDefuncionesTitle}">
+            <h:form id="DefuncionesViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{defuncionesController.selected != null}">
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_idPersona}"/>
+                        <h:outputText value="#{defuncionesController.selected.idPersona.nombre.concat(' ').concat(defuncionesController.selected.idPersona.apellidos)}" />
+                        
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{defuncionesController.selected.fechaNacimiento}" title="#{bundle.ViewDefuncionesTitle_fechaNacimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_fechaFallecimiento}"/>
+                        <h:outputText value="#{defuncionesController.selected.fechaFallecimiento}" title="#{bundle.ViewDefuncionesTitle_fechaFallecimiento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_causa}"/>
+                        <h:outputText value="#{defuncionesController.selected.causa}" title="#{bundle.ViewDefuncionesTitle_causa}"/>
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_lugar}"/>
+                        <h:outputText value="#{defuncionesController.selected.lugar}" title="#{bundle.ViewDefuncionesTitle_lugar}"/>
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_fechaFuneral}"/>
+                        <h:outputText value="#{defuncionesController.selected.fechaFuneral}" title="#{bundle.ViewDefuncionesTitle_fechaFuneral}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        </p:panelGrid>
+                        <br></br>
+                        <p:panelGrid columns="2" rendered="#{defuncionesController.selected != null}">                    
+                        <h:outputText value="#{bundle.ViewDefuncionesLabel_observaciones}"/>
+                        <p:inputTextarea disabled="true" style="width: 375px" value="#{defuncionesController.selected.observaciones}" />
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

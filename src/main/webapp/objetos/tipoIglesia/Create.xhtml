@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TipoIglesiaCreateDlg" widgetVar="TipoIglesiaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTipoIglesiaTitle}">
+            <h:form id="TipoIglesiaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{tipoIglesiaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTipoIglesiaLabel_nombreTipoIglesia}" for="nombreTipoIglesia" />
+                        <p:inputText id="nombreTipoIglesia" value="#{tipoIglesiaController.selected.nombreTipoIglesia}" title="#{bundle.CreateTipoIglesiaTitle_nombreTipoIglesia}" required="true" requiredMessage="#{bundle.CreateTipoIglesiaRequiredMessage_nombreTipoIglesia}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{tipoIglesiaController.create}" value="#{bundle.Save}" update="display,:TipoIglesiaListForm:datalist,:growl" oncomplete="handleSubmit(args,'TipoIglesiaCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

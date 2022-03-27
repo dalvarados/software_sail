@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ClaseCuentaViewDlg" widgetVar="ClaseCuentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewClaseCuentaTitle}">
+            <h:form id="ClaseCuentaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{claseCuentaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewClaseCuentaLabel_idClaseCuenta}"/>
+                        <h:outputText value="#{claseCuentaController.selected.idClaseCuenta}" title="#{bundle.ViewClaseCuentaTitle_idClaseCuenta}"/>
+                        <h:outputText value="#{bundle.ViewClaseCuentaLabel_nombreClaseCuenta}"/>
+                        <h:outputText value="#{claseCuentaController.selected.nombreClaseCuenta}" title="#{bundle.ViewClaseCuentaTitle_nombreClaseCuenta}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ClaseCuentaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

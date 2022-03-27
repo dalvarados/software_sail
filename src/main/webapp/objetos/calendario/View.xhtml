@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalendarioViewDlg" widgetVar="CalendarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewCalendarioTitle}">
+            <h:form id="CalendarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{calendarioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_idCalendario}"/>
+                        <h:outputText value="#{calendarioController.selected.idCalendario}" title="#{bundle.ViewCalendarioTitle_idCalendario}"/>
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_tituloEvento}"/>
+                        <h:outputText value="#{calendarioController.selected.tituloEvento}" title="#{bundle.ViewCalendarioTitle_tituloEvento}"/>
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_fechaInicio}"/>
+                        <h:outputText value="#{calendarioController.selected.fechaInicio}" title="#{bundle.ViewCalendarioTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_fechaFin}"/>
+                        <h:outputText value="#{calendarioController.selected.fechaFin}" title="#{bundle.ViewCalendarioTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_descripcionEvento}"/>
+                        <h:outputText value="#{calendarioController.selected.descripcionEvento}" title="#{bundle.ViewCalendarioTitle_descripcionEvento}"/>
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_estadoEvento}"/>
+                        <p:selectBooleanCheckbox value="#{calendarioController.selected.estadoEvento}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewCalendarioLabel_idComite}"/>
+                        <h:outputText value="#{calendarioController.selected.idComite}" title="#{bundle.ViewCalendarioTitle_idComite}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

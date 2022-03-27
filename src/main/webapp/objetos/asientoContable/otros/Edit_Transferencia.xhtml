@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AsientoContableEditTransferenciaDlg" widgetVar="AsientoContableEditTransferenciaDialog" modal="true" resizable="false" appendTo="@(body)" header="Editar Transferencia">
+            <h:form id="AsientoContableEditTransferenciaForm">
+                <h:panelGroup id="display">                    
+                    <p:panelGrid columns="4" rendered="#{asientoContableController.selected != null}">
+                    <p:outputLabel value="Cuenta Origen" for="idPuc" />
+                    <p:selectOneMenu disabled="true" style="width: 160px" id="idPuc" value="#{asientoContableController.selected.idPuc}" >                                                                 
+                        <f:selectItems   value="#{asientoContableController.list_cuenta_activo_caja}"                                        
+                                           var="idPucItem" 
+                                           itemValue="#{idPucItem}" itemLabel="#{idPucItem.nombre} "/>
+                        </p:selectOneMenu>                        
+                        <p:outputLabel value="Cuenta Destino" for="idPuc1" />
+                        <p:selectOneMenu style="width: 160px" disabled="true" filter="true" filterMatchMode="startsWith"  id="idPuc1" value="#{asientoContableController.selected.idPuc}" >                                                                 
+                        <f:selectItems  value="#{asientoContableController.list_cuenta_activo_caja_menor}"                                        
+                                           var="idPucItem" 
+                                           itemValue="#{idPucItem}" itemLabel="#{idPucItem.nombre} "/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Saldo Fondo Local"/>
+                        <p:inputText style="width: 173px" disabled="true" value="#{asientoContableController.saldoFondoLocal}" >                            
+                            <f:convertNumber pattern="$##,###" /> </p:inputText>
+                        <p:outputLabel value="Saldo Caja Menor"/>
+                        <p:inputText style="width: 173px" disabled="true" value="#{asientoContableController.saldoCajaMenor}" >
+                            <f:convertNumber pattern="$##,###" /> </p:inputText>
+                       </p:panelGrid>                    
+                    <p:spacer height="3"/>
+                    
+                    <p:panelGrid columns="4" rendered="#{asientoContableController.selected != null}">                                            
+                        <p:outputLabel value="Fecha Registro" for="fechaCreacion" />
+                        <p:inputText  style="width: 210px" disabled="true" id="fechaCreacion" value="#{session.lastAccessedTime}">
+                           <f:convertDateTime pattern="dd/MM/yyyy" type="date" /></p:inputText>
+                                                
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_descripcion}" for="descripcion" />
+                        <p:inputTextarea style="width: 210px" id="descripcion" value="#{asientoContableController.selected.descripcion}" title="#{bundle.CreateAsientoContableTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_valorDebito}" for="valorDebito" />
+                        <p:inputText style="width: 210px" id="valorDebito" value="#{asientoContableController.selected.valorCredito}" >
+                            <f:convertNumber pattern="##,###"/> </p:inputText>                                                         
+                    </p:panelGrid>
+                  
+                    <p:commandButton actionListener="#{asientoContableController.updateEgreso}" value="Agregar" update="display,:AsientoContableTransferenciaListForm:datalist,:growl" oncomplete="handleSubmit(args,'AsientoContableEditTransferenciaDialog');"/>
+                        <p:commandButton  actionListener="#{asientoContableController.cerrarEgreso}" value="Cerrar" oncomplete="handleSubmit(args,'AsientoContableEditTransferenciaDialog');"/>                    
+                </h:panelGroup>
+            </h:form>
+
+        </p:dialog>
+
+    </ui:composition>
+</html>

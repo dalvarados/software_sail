@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaEditDlg2" widgetVar="PersonaEditDialog2" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaTitle}">
+            <h:form id="PersonaEditForm2">
+               <h:panelGroup id="display2">
+                  <p:tabView >
+                    <p:tab title="Datos Personales" >  
+                    <p:panelGrid columns="4" rendered="#{personaController.objeto_persona != null}">
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaRegistro}" />
+                        <h:outputText  value="#{personaController.objeto_persona.fechaRegistro}" >
+                             <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>                        
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_documentoIdentidad}" />
+                        <h:outputText value="#{personaController.objeto_persona.documentoIdentidad}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" />
+                        <h:outputText value="#{personaController.objeto_persona.nombre}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_apellidos}" />
+                        <h:outputText value="#{personaController.objeto_persona.apellidos}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}"  />
+                        <h:outputText value="#{personaController.objeto_persona.sexo}" />
+                                              
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_direccion}"  />
+                        <h:outputText value="#{personaController.objeto_persona.direccion}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_telefono}"  />
+                        <h:outputText  value="#{personaController.objeto_persona.telefono}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_numeroCelular}"  />
+                        <h:outputText value="#{personaController.objeto_persona.numeroCelular}" />
+
+                        <p:outputLabel value="Correo electronico"  />
+                        <h:outputText value="#{personaController.objeto_persona.correo}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_estadoCivil}"  />
+                        <h:outputText value="#{personaController.objeto_persona.estadoCivil}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaNacimiento}"  />
+                             <h:outputText value="#{personaController.objeto_persona.fechaNacimiento}" >
+                             <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>                            
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_bautizado}"  />
+                        <p:selectBooleanCheckbox disabled="true" id="bautizado" value="#{personaController.objeto_persona.bautizado}" />
+                        
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idRol}"/>
+                        <h:outputText value="#{personaController.objeto_persona.idRol}" />
+
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idBarrio}"  />
+                        <h:outputText value="#{personaController.objeto_persona.idBarrio.nombreBarrio}" />
+  
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idLugarNacimiento}"  />
+                        <h:outputText value="#{personaController.objeto_persona.idLugarNacimiento.nombreCiudad}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idOcupacion}"  />
+                        <h:outputText value="#{personaController.objeto_persona.idOcupacion.nombreOcupacion}" />
+
+
+                        <p:outputLabel value="Nivel de estudios "  />      
+                        <h:outputText value="#{personaController.objeto_persona.nivelEstudio}" />
+
+                        <p:outputLabel value="Numero de hijos"  />
+                        <h:outputText value="#{personaController.objeto_persona.numeroHijos}"/>
+
+                    </p:panelGrid>
+                     </p:tab>
+                      <p:tab title="Datos Membresia">
+                        <p:panelGrid columns="4" rendered="#{personaController.objeto_persona != null}">
+
+                        <p:outputLabel value="Fecha Cambio Membresia" for="fechaInactivo1" />
+                        <p:calendar id="fechaInactivo1" pattern="dd/MM/yyyy" value="#{personaController.objeto_persona.fechaInactivo}" showOn="button"/>
+                            
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_estadoMembrecia}" for="estadoMembrecia" />
+                        <p:selectOneMenu id="estadoMembrecia" value="#{personaController.objeto_persona.estadoMembrecia}">
+                        <f:selectItem itemLabel="Inactivo" itemValue="Inactivo" />
+                        <f:selectItem itemLabel="Activo" itemValue="Activo" />
+                        </p:selectOneMenu>  
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaMembreciaLocal}"  />
+                        <h:outputText  value="#{personaController.objeto_persona.fechaMembreciaLocal}" >
+                             <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText> 
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idIglesiaBautismo}" />
+                        <h:outputText value="#{personaController.objeto_persona.idIglesiaBautismo.nombreIglesia}"/>
+                        
+                        <p:outputLabel value="Conyuge en esta iglesia " for="parejaAsisteIglesia" />
+                        <p:selectBooleanCheckbox  disabled="true" id="parejaAsisteIglesia" value="#{personaController.objeto_persona.parejaAsisteIglesia}" />
+
+                        <p:outputLabel value="Motivo del cambio" for="observacionesCambio"/>
+                        <p:inputTextarea style="width: 320px" id="observacionesCambio" value="#{personaController.objeto_persona.observacionesInactivo}" />                          
+                       </p:panelGrid>                              
+                      </p:tab>                        
+                  </p:tabView>                        
+                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display2,:PersonaListForm2:objetoPersona,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog2');"/>
+                  </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

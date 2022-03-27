@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwRecomendacionCartaCreateDlg" widgetVar="VwRecomendacionCartaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateVwRecomendacionCartaTitle}">
+            <h:form id="VwRecomendacionCartaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwRecomendacionCartaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_idPersona}" for="idPersona" />
+                        <p:inputText id="idPersona" value="#{vwRecomendacionCartaController.selected.idPersona}" title="#{bundle.CreateVwRecomendacionCartaTitle_idPersona}" required="true" requiredMessage="#{bundle.CreateVwRecomendacionCartaRequiredMessage_idPersona}"/>
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_dia}" for="dia" />
+                        <p:inputText id="dia" value="#{vwRecomendacionCartaController.selected.dia}" title="#{bundle.CreateVwRecomendacionCartaTitle_dia}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_mes}" for="mes" />
+                        <p:inputText id="mes" value="#{vwRecomendacionCartaController.selected.mes}" title="#{bundle.CreateVwRecomendacionCartaTitle_mes}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_anio}" for="anio" />
+                        <p:inputText id="anio" value="#{vwRecomendacionCartaController.selected.anio}" title="#{bundle.CreateVwRecomendacionCartaTitle_anio}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_tipoDocumento}" for="tipoDocumento" />
+                        <p:inputText id="tipoDocumento" value="#{vwRecomendacionCartaController.selected.tipoDocumento}" title="#{bundle.CreateVwRecomendacionCartaTitle_tipoDocumento}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText id="documentoIdentidad" value="#{vwRecomendacionCartaController.selected.documentoIdentidad}" title="#{bundle.CreateVwRecomendacionCartaTitle_documentoIdentidad}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{vwRecomendacionCartaController.selected.nombre}" title="#{bundle.CreateVwRecomendacionCartaTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_nombreIglesia}" for="nombreIglesia" />
+                        <p:inputText id="nombreIglesia" value="#{vwRecomendacionCartaController.selected.nombreIglesia}" title="#{bundle.CreateVwRecomendacionCartaTitle_nombreIglesia}" required="true" requiredMessage="#{bundle.CreateVwRecomendacionCartaRequiredMessage_nombreIglesia}"/>
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{vwRecomendacionCartaController.selected.direccion}" title="#{bundle.CreateVwRecomendacionCartaTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{vwRecomendacionCartaController.selected.telefono}" title="#{bundle.CreateVwRecomendacionCartaTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_pastor}" for="pastor" />
+                        <p:inputText id="pastor" value="#{vwRecomendacionCartaController.selected.pastor}" title="#{bundle.CreateVwRecomendacionCartaTitle_pastor}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_identificacionPastor}" for="identificacionPastor" />
+                        <p:inputText id="identificacionPastor" value="#{vwRecomendacionCartaController.selected.identificacionPastor}" title="#{bundle.CreateVwRecomendacionCartaTitle_identificacionPastor}" />
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_nombreCiudad}" for="nombreCiudad" />
+                        <p:inputText id="nombreCiudad" value="#{vwRecomendacionCartaController.selected.nombreCiudad}" title="#{bundle.CreateVwRecomendacionCartaTitle_nombreCiudad}" required="true" requiredMessage="#{bundle.CreateVwRecomendacionCartaRequiredMessage_nombreCiudad}"/>
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_nombreDepartamento}" for="nombreDepartamento" />
+                        <p:inputText id="nombreDepartamento" value="#{vwRecomendacionCartaController.selected.nombreDepartamento}" title="#{bundle.CreateVwRecomendacionCartaTitle_nombreDepartamento}" required="true" requiredMessage="#{bundle.CreateVwRecomendacionCartaRequiredMessage_nombreDepartamento}"/>
+                        <p:outputLabel value="#{bundle.CreateVwRecomendacionCartaLabel_nombrePais}" for="nombrePais" />
+                        <p:inputText id="nombrePais" value="#{vwRecomendacionCartaController.selected.nombrePais}" title="#{bundle.CreateVwRecomendacionCartaTitle_nombrePais}" required="true" requiredMessage="#{bundle.CreateVwRecomendacionCartaRequiredMessage_nombrePais}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{vwRecomendacionCartaController.create}" value="#{bundle.Save}" update="display,:VwRecomendacionCartaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VwRecomendacionCartaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VwRecomendacionCartaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

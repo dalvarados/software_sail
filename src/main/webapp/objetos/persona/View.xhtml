@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaViewDlg" widgetVar="PersonaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonaTitle}">
+            <h:form id="PersonaViewForm">
+                <h:panelGroup id="display">
+                    
+                <p:tabView >
+                    <p:tab title="Datos Personales" >  
+                    <p:panelGrid columns="4" rendered="#{personaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonaLabel_fechaRegistro}"/>
+                        <h:outputText value="#{personaController.selected.fechaRegistro}" title="#{bundle.ViewPersonaTitle_fechaRegistro}">
+                        <f:convertDateTime pattern="dd/mm/yyyy" /></h:outputText>                        
+                        <h:outputText value="Tipo Documento"/>
+                        <h:outputText value="#{personaController.selected.tipoDocumento}" title="#{bundle.ViewPersonaTitle_documentoIdentidad}"/>                        
+                        <h:outputText value="#{bundle.ViewPersonaLabel_documentoIdentidad}"/>
+                        <h:outputText value="#{personaController.selected.documentoIdentidad}" title="#{bundle.ViewPersonaTitle_documentoIdentidad}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_nombre}"/>
+                        <h:outputText value="#{personaController.selected.nombre}" title="#{bundle.ViewPersonaTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_apellidos}"/>
+                        <h:outputText value="#{personaController.selected.apellidos}" title="#{bundle.ViewPersonaTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_sexo}"/>
+                        <h:outputText value="#{personaController.selected.sexo}" title="#{bundle.ViewPersonaTitle_sexo}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_direccion}"/>
+                        <h:outputText value="#{personaController.selected.direccion}" title="#{bundle.ViewPersonaTitle_direccion}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_telefono}"/>
+                        <h:outputText value="#{personaController.selected.telefono}" title="#{bundle.ViewPersonaTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_numeroCelular}"/>
+                        <h:outputText value="#{personaController.selected.numeroCelular}" title="#{bundle.ViewPersonaTitle_numeroCelular}"/>
+                        <h:outputText value="Correo electronico"/>
+                        <h:outputText value="#{personaController.selected.correo}" title="Correo electronico" />                   
+                        <h:outputText value="#{bundle.ViewPersonaLabel_estadoCivil}"/>
+                        <h:outputText value="#{personaController.selected.estadoCivil}" title="#{bundle.ViewPersonaTitle_estadoCivil}"/>
+                        <h:outputText value="#{bundle.ViewPersonaLabel_fechaNacimiento}"/>
+                        <h:outputText value="#{personaController.selected.fechaNacimiento}" title="#{bundle.ViewPersonaTitle_fechaNacimiento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" /></h:outputText>  
+                         <h:outputText value="#{bundle.CreatePersonaLabel_idBarrio}"  />
+                        <h:outputText value="#{personaController.selected.idBarrio.nombreBarrio}"/>
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idLugarNacimiento}"  />
+                        <h:outputText value="#{personaController.selected.idLugarNacimiento.nombreCiudad}"/>   
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idRol}" />
+                        <h:outputText value="#{personaController.selected.idRol.nombreRol}"/>
+                        
+                        <h:outputText value="#{bundle.CreatePersonaLabel_idOcupacion}"  />
+                        <h:outputText value="#{personaController.selected.idOcupacion.nombreOcupacion}"/>   
+                        <h:outputText value="Nivel de estudios "  />    
+                        <h:outputText value="#{personaController.selected.nivelEstudio}"/>
+                        <h:outputText value="Numero de hijos"  />
+                         <h:outputText value="#{personaController.selected.numeroHijos}"/>
+                    </p:panelGrid>
+                        
+                     </p:tab>
+                      <p:tab title="Datos Visita"> 
+                        <p:panelGrid columns="4" rendered="#{personaController.selected != null}">
+                        <h:outputText value="Influencia o trasfondo religioso" />
+                        <h:outputText value="#{personaController.selected.trasfondoReligioso}"/>
+                        <h:outputText value="Cómo conocio la iglesia" />
+                        <h:outputText value="#{personaController.selected.comoLlegoIglesia}"/>
+                        <h:outputText value="Visita primera vez" />
+                        <p:selectBooleanCheckbox  disabled="true" id="primeraVisita" value="#{personaController.selected.primeraVisita}" />                  
+                        <h:outputText value="Tiempo de asistencia" />
+                        <h:outputText value="#{personaController.selected.tiempoDeVisitar}"/>
+                        <h:outputText value="Participo en discipulado" />
+                        <p:selectBooleanCheckbox disabled="true" id="participoDiscipulado" value="#{personaController.selected.participoDiscipulado}" />
+
+                        <h:outputText value="Lugar de discipulado"  />
+                        <h:outputText value="#{personaController.selected.lugarDiscipulado}"/>
+
+                        <h:outputText value="Desea discipulado"  />
+                        <p:selectBooleanCheckbox disabled="true" id="deseaDiscipulado" value="#{personaController.selected.deseaDiscipulado}" />
+
+                        <h:outputText value="Razones de asistencia"  />
+                        <h:outputText value="#{personaController.selected.razonesAsistencia}"/>
+
+                        <h:outputText value="Luchas espirituales" />
+                        <h:outputText value="#{personaController.selected.luchasEspirituales}"/>                           
+
+                        <p:outputLabel value="Desea recibir informacion"  />
+                        <p:selectBooleanCheckbox disabled="true" id="recibirInformacion" value="#{personaController.selected.recibirInformacion}" />                        
+
+                        <h:outputText value="Contacto Personal" />
+                        <h:outputText value="#{personaController.selected.contactovisita}"/>  
+                        
+                        </p:panelGrid>                      
+                      </p:tab>
+                  </p:tabView> 
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

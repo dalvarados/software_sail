@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear Tercero">
+            <h:form id="PersonaCreateForm" >             
+                <h:panelGroup id="display">
+                    <p:tabView >                        
+                    <p:tab title="Tercero" >
+                    <p:panelGrid columns="4" rendered="#{personaController.objeto_persona != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaRegistro}" for="fechaRegistro"  />
+                        <p:calendar id="fechaRegistro"  pattern="dd/MM/yyyy" value="#{personaController.objeto_persona.fechaRegistro}" title="#{bundle.EditPersonaTitle_fechaRegistro}"  showOn="button"/>                        
+                        <p:outputLabel value="Tipo Documento" for="tipoDocumento" />
+                        <p:selectOneMenu id="tipoDocumento" value="#{personaController.objeto_persona.tipoDocumento}">
+                        <f:selectItem itemLabel="NIT" itemValue="Nit" />  
+                        <f:selectItem itemLabel="CC" itemValue="cédula de ciudadanía" />                                          
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText  id="documentoIdentidad" value="#{personaController.objeto_persona.documentoIdentidad}" title="#{bundle.CreatePersonaTitle_documentoIdentidad}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personaController.objeto_persona.nombre}" title="#{bundle.CreatePersonaTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombre}"/>
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{personaController.objeto_persona.direccion}" title="#{bundle.CreatePersonaTitle_direccion}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{personaController.objeto_persona.telefono}" title="#{bundle.CreatePersonaTitle_telefono}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_numeroCelular}" for="numeroCelular" />
+                        <p:inputText id="numeroCelular" value="#{personaController.objeto_persona.numeroCelular}" title="#{bundle.CreatePersonaTitle_numeroCelular}" />
+
+                        <p:outputLabel value="Correo electronico" for="correo" />
+                        <p:inputText id="correo" value="#{personaController.objeto_persona.correo}" />                     
+                        
+                        <p:outputLabel value="Tipo" for="idRol" />
+                        <p:selectOneMenu id="idRol" value="#{personaController.objeto_persona.idRolContable}" >
+                            <f:selectItems value="#{personaController.list_rol_contable}"
+                                           var="idRolItem"
+                                           itemValue="#{idRolItem}" itemLabel="#{idRolItem.nombreRol}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Descipcion" for="descripcion" />
+                        <p:inputTextarea style="width: 170px" id="descripcion" value="#{personaController.objeto_persona.habilidades}" />                     
+                        
+                        <p:outputLabel value="Ciudad" for="idciudad" />
+                        <p:selectOneMenu id="idciudad" value="#{personaController.objeto_persona.idLugarNacimiento}" >
+                        <f:selectItem itemLabel="" itemValue="-1" />                              
+                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
+                                           var="idLugarNacimientoItem"
+                                           itemValue="#{idLugarNacimientoItem}" itemLabel="#{idLugarNacimientoItem.nombreCiudad}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Clasificacion" for="idRolClasificacion" />
+                        <p:selectOneMenu id="idRolClasificacion" value="#{personaController.objeto_persona.idRolClasificacion}" >
+                            <f:selectItem itemLabel="" itemValue="" />                             
+                            <f:selectItems value="#{personaController.list_rol_proveedor}"
+                                           var="idRolClasificacionItem"
+                                           itemValue="#{idRolClasificacionItem}" itemLabel="#{idRolClasificacionItem.nombreRol}"/>
+                        </p:selectOneMenu>
+
+
+                    </p:panelGrid> 
+                        </p:tab>
+                        <p:tab title="Creyente">  
+                        <p:panelGrid id="objetoPersona" columns="4">
+                        <h:inputText id="documentoIdentidad222" value="#{personaController.documentoIdentidad}" />
+                        <h:outputText value="Folio N°"/>
+                        <h:outputText value="#{personaController.objeto_persona.folio}"/>
+                            </p:panelGrid>
+                            </p:tab>
+                  </p:tabView>                     
+                    <p:commandButton id="b"  actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:PersonaListFormTercero:datalist,:growl"  oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
+                    <p:commandButton  id="v" actionListener="#{personaController.obtener_lista_persona()}" value="Buscar" />
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

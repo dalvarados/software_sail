@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InventarioViewDlg" widgetVar="InventarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInventarioTitle}">
+            <h:form id="InventarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{inventarioController.selected != null}">
+                       <h:outputText value="#{bundle.ViewInventarioLabel_nombre}"/>
+                        <h:outputText value="#{inventarioController.selected.nombre}" title="#{bundle.ViewInventarioTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_precioUnitario}"/>
+                        <h:outputText value="#{inventarioController.selected.precioUnitario}" title="#{bundle.ViewInventarioTitle_precioUnitario}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_cantidad}"/>
+                        <h:outputText value="#{inventarioController.selected.cantidad}" title="#{bundle.ViewInventarioTitle_cantidad}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_precioTotal}"/>
+                        <h:outputText value="#{inventarioController.selected.precioTotal}" title="#{bundle.ViewInventarioTitle_precioTotal}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_marca}"/>
+                        <h:outputText value="#{inventarioController.selected.marca}" title="#{bundle.ViewInventarioTitle_marca}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_fechaAdquisicion}"/>
+                        <h:outputText value="#{inventarioController.selected.fechaAdquisicion}" title="#{bundle.ViewInventarioTitle_fechaAdquisicion}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_propio}"/>
+                        <h:outputText value="#{inventarioController.selected.propio}" title="#{bundle.ViewInventarioTitle_propio}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_condicion}"/>
+                        <h:outputText value="#{inventarioController.selected.condicion}" title="#{bundle.ViewInventarioTitle_condicion}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_idComite}"/>
+                        <h:outputText value="#{inventarioController.selected.idComite.nombreComite}" title="#{bundle.ViewInventarioTitle_idComite}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_idPersona}"/>
+                        <h:outputText value="#{inventarioController.selected.idPersona.nombre.concat(' ').concat(inventarioController.selected.idPersona.apellidos)}" />
+                        <h:outputText value="#{bundle.ViewInventarioLabel_estado}"/>
+                        <h:outputText value="#{inventarioController.selected.estado}" title="#{bundle.ViewInventarioTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewInventarioLabel_fechaBaja}"/>
+                        <h:outputText value="#{inventarioController.selected.fechaBaja}" title="#{bundle.ViewInventarioTitle_fechaBaja}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        </p:panelGrid>
+                        <br></br>
+                        <p:panelGrid columns="2" rendered="#{inventarioController.selected != null}">                        
+                        <h:outputText value="#{bundle.ViewInventarioLabel_observaciones}"/>
+                        <p:inputTextarea disabled="true" style="width: 300px" value="#{inventarioController.selected.observaciones}" title="#{bundle.ViewInventarioTitle_observaciones}"/>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <a href="Create_Egreso.xhtml"></a>
+    <ui:composition>
+
+        <p:dialog id="AsientoContableEgresoLegalizacionesCreateDlg" closable="false" widgetVar="AsientoContableEgresoLegalizacionesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Crear Egreso por legalizar">
+            <h:form id="AsientoContableEgresoLegalizacionesCreateForm">
+                <h:panelGroup id="display">
+                    
+                    <p:panelGrid columns="4" rendered="#{asientoContableController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:inputText style="width: 155px" disabled="true" id="fechaRegistro" value="#{session.lastAccessedTime}">
+                           <f:convertDateTime pattern="dd/MM/yyyy" type="date" /></p:inputText>
+
+                        <p:outputLabel value="Numero Ingreso" for="numeroTipoContable" />
+                        <p:inputText style="width: 163px" id="numeroTipoContable" value="#{asientoContableController.selected.numeroTipoContable}" title="#{bundle.CreateAsientoContableTitle_numeroTipoContable}" />
+
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_valorDebito}" for="valorDebito" />
+                        <p:inputText id="valorDebito" value="#{asientoContableController.selected.valorDebito}" title="#{bundle.CreateAsientoContableTitle_valorDebito}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_idTercero}" for="idTercero" />
+                        <p:selectOneMenu filter="true" filterMatchMode="startsWith" style="width: 148px" 
+                                         id="idTercero" value="#{asientoContableController.selected.idTercero}" >
+                            <f:selectItem itemLabel="" itemValue="" />
+                            <f:selectItems value="#{asientoContableController.rol_tercero}"
+                                           var="idTerceroItem"
+                                           itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
+                        </p:selectOneMenu> 
+                                                
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_descripcion}" for="descripcion" />
+                        <p:inputTextarea id="descripcion" value="#{asientoContableController.selected.descripcion}" title="#{bundle.CreateAsientoContableTitle_descripcion}" />
+
+
+                        <p:outputLabel value="Responsable Ppal" for="idResponsablePpal" />
+                        <p:selectOneMenu style="width: 148px" id="idResponsablePpal" 
+                                         value="#{asientoContableController.selected.idTesorero}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idResponsablePpalItem"
+                                           itemValue="#{idResponsablePpalItem}" itemLabel="#{idResponsablePpalItem.nombre.concat(' ').concat(idResponsablePpalItem.apellidos)}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_idPuc}" for="idPuc2" />
+                        <p:selectOneMenu  style="width: 148px" id="idPuc2" value="#{asientoContableController.selected.idPuc}" >
+                            <f:selectItems value="#{asientoContableController.list_cuenta_activo_caja}"
+                                           var="idPucItem"
+                                           itemValue="#{idPucItem}" itemLabel="#{idPucItem.nombre}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateAsientoContableLabel_idPuc}" for="idPuc" />
+                        <p:selectOneMenu  style="width: 148px" id="idPuc" value="#{asientoContableController.cuentasPucAuxiliar}" >
+                            <f:selectItems value="#{asientoContableController.list_cuenta_activo_caja_menor}"
+                                           var="idPucItem2"
+                                           itemValue="#{idPucItem2}" itemLabel="#{idPucItem2.nombre}"/>
+                        </p:selectOneMenu>
+                        
+                    </p:panelGrid>  
+                    <p:commandButton value="Guardar" actionListener="#{asientoContableController.createAsientosContables}" update="display,:AsientoContableEgresoLegalizacionesListForm:datalist,:growl"/>
+                    <p:commandButton value="Cerrar" oncomplete="handleSubmit(args,'AsientoContableEgresoLegalizacionesCreateDialog');"/>                                  
+                </h:panelGroup>
+            </h:form>
+<!--          <ui:include src="Editar_detalle_egreso.xhtml"/>-->
+        </p:dialog>
+    </ui:composition>
+</html>

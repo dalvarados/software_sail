@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="DiezmoCreateDlg" widgetVar="DiezmoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateDiezmoTitle}">
+            <h:form id="DiezmoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="5" rendered="#{diezmoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateDiezmoLabel_fechaDiezmo}" for="fechaDiezmo" />
+                        <p:calendar  size="18" id="fechaDiezmo" pattern="dd/MM/yyyy" value="#{diezmoController.selected.fechaDiezmo}" title="#{bundle.EditDiezmoTitle_fechaDiezmo}" required="true" requiredMessage="#{bundle.EditDiezmoRequiredMessage_fechaDiezmo}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateDiezmoLabel_valorDiezmo}" for="valorDiezmo" />
+                        <p:inputText required="true" style="width: 120px" id="valorDiezmo" value="#{diezmoController.selected.valorDiezmo}" title="#{bundle.CreateDiezmoTitle_valorDiezmo}" />                        
+                        <p:commandButton id="Calcular" actionListener="#{diezmoController.liquidarDiezmos}" value="Calcular" update="display,vNumIngresoFondo, numEgresoCorpente, vNumEgresoDiezmos,:growl"/>                       
+                    </p:panelGrid>
+                    
+                    <p:spacer height="10"/>
+                    
+                    <p:panelGrid id="totales" columns="4" rendered="#{diezmoController.selected != null}">
+                        <p:outputLabel value="N° Ingreso Fondo Local" for="numIngresoFondo" />
+                        <p:inputText style="width: 120px"  id="numIngresoFondo" value="#{diezmoController.selected.numIngreso}" />                        
+                        <p:outputLabel value="Valor liquidado" for="vNumIngresoFondo" />
+                        <p:inputText  style="width: 120px" disabled="true" id="vNumIngresoFondo" value="#{diezmoController.selected.valorFondoLocal}" >
+                                    <f:convertNumber pattern="##,###"/> </p:inputText>                            
+
+                        <p:outputLabel value="N° Egreso CorpenteUnida" for="numEgresoCorpente" />
+                        <p:inputText  style="width: 120px" id="numEgresoCorpente" value="#{diezmoController.numeEgresoCorpenteUnida}" />                        
+                        <p:outputLabel value="Valor liquidado" for="vNumEgresoCorpente" />
+                        <p:inputText style="width: 120px" disabled="true"  id="vNumEgresoCorpente" value="#{diezmoController.selected.valorCorpenteUnida}" >
+                                    <f:convertNumber pattern="##,###"/> </p:inputText>                                                    
+                        
+                        <p:outputLabel value="N° Egreso Pastor" for="numEgresoDiezmos" />
+                        <p:inputText  style="width: 120px" id="numEgresoDiezmos" value="#{diezmoController.numeroEgresoPastor}" />                                                
+                        <p:outputLabel value="Valor liquidado" for="vNumEgresoDiezmos" />
+                        <p:inputText style="width: 120px" disabled="true" id="vNumEgresoDiezmos" value="#{diezmoController.selected.valorPastor}" >
+                                    <f:convertNumber pattern="##,###"/> </p:inputText>                                                                                                   
+                    </p:panelGrid>
+                    <p:spacer height="10"/>
+                  <p:panelGrid  columns="4" rendered="#{diezmoController.selected != null}">
+                      <p:outputLabel value="#{bundle.CreateDiezmoLabel_idResponsablePpal}" for="idResponsablePpal" />
+                        <p:selectOneMenu style="width: 170px" id="idResponsablePpal" value="#{diezmoController.selected.idResponsablePpal}" >
+                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                                           var="idResponsablePpalItem"
+                                           itemValue="#{idResponsablePpalItem}" itemLabel="#{idResponsablePpalItem.nombre.concat(' ').concat(idResponsablePpalItem.apellidos)}"/>
+                        </p:selectOneMenu>                        
+
+                      <p:outputLabel value="#{bundle.CreateDiezmoLabel_idPersona}" for="idPersona" />
+                        <p:selectOneMenu  style="width: 170px" id="idPersona" value="#{diezmoController.selected.idPersona}" >
+                            <f:selectItems value="#{personaController.list_pastor}"
+                                           var="idPersonaItem"
+                                           itemValue="#{idPersonaItem}" itemLabel="#{idPersonaItem.nombre.concat(' ').concat(idPersonaItem.apellidos)}"/>
+                        </p:selectOneMenu>                                                
+                  </p:panelGrid>
+                     <p:commandButton actionListener="#{diezmoController.create}" value="#{bundle.Save}" update="display,:DiezmoListForm:datalist,:growl" />
+                     <p:commandButton value="Cerrar" immediate="true" oncomplete="handleSubmit(args,'DiezmoCreateDialog');"/>
+
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VwOfrendaMensualViewDlg" widgetVar="VwOfrendaMensualViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewVwOfrendaMensualTitle}">
+            <h:form id="VwOfrendaMensualViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{vwOfrendaMensualController.selected != null}">
+                        <h:outputText value="#{bundle.ViewVwOfrendaMensualLabel_id}"/>
+                        <h:outputText value="#{vwOfrendaMensualController.selected.id}" title="#{bundle.ViewVwOfrendaMensualTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewVwOfrendaMensualLabel_fecha}"/>
+                        <h:outputText value="#{vwOfrendaMensualController.selected.fecha}" title="#{bundle.ViewVwOfrendaMensualTitle_fecha}"/>
+                        <h:outputText value="#{bundle.ViewVwOfrendaMensualLabel_nombreComite}"/>
+                        <h:outputText value="#{vwOfrendaMensualController.selected.nombreComite}" title="#{bundle.ViewVwOfrendaMensualTitle_nombreComite}"/>
+                        <h:outputText value="#{bundle.ViewVwOfrendaMensualLabel_valor}"/>
+                        <h:outputText value="#{vwOfrendaMensualController.selected.valor}" title="#{bundle.ViewVwOfrendaMensualTitle_valor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="VwOfrendaMensualViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

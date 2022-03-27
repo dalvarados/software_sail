@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CalendarioEditDlg" widgetVar="CalendarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditCalendarioTitle}">
+            <h:form id="CalendarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{calendarioController.selected != null}">
+                        <p:outputLabel value="Titulo"/>
+                        <p:inputText style="width: 300px" value="#{calendarioController.selected.tituloEvento}"/>    
+                        
+                        <p:outputLabel value="Tipo Evento" for="tipo" />
+                        <p:selectOneMenu id="tipo" value="#{calendarioController.selected.tipo}">
+                        <f:selectItem itemLabel="Evento" itemValue="Evento" />                            
+                        <f:selectItem itemLabel="Presentacion de niños" itemValue="Presentacion de niños" />
+                        <f:selectItem itemLabel="Membresia local" itemValue="Membresia local" />
+                        <f:selectItem itemLabel="Reuniones" itemValue="Reuniones" />
+                        <f:selectItem itemLabel="Compromisos" itemValue="Compromisos" />
+                        </p:selectOneMenu>                          
+                        
+                        <p:outputLabel value="#{bundle.EditCalendarioLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" timeZone="America/Bogota" locale="es" pattern="yyyy/MM/dd HH:mm" value="#{calendarioController.selected.fechaInicio}" title="#{bundle.EditCalendarioTitle_fechaInicio}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCalendarioLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" timeZone="America/Bogota" locale="es" pattern="yyyy/MM/dd HH:mm" value="#{calendarioController.selected.fechaFin}" title="#{bundle.EditCalendarioTitle_fechaFin}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditCalendarioLabel_descripcionEvento}" for="descripcionEvento" />
+                        <p:inputText id="descripcionEvento" value="#{calendarioController.selected.descripcionEvento}" title="#{bundle.EditCalendarioTitle_descripcionEvento}" />
+                        <p:outputLabel value="#{bundle.EditCalendarioLabel_idComite}" for="idComite" />
+                        <p:selectOneMenu id="idComite" value="#{calendarioController.selected.idComite}" required="true" requiredMessage="#{bundle.EditCalendarioRequiredMessage_idComite}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{comiteController.itemsAvailableSelectOne}"
+                                           var="idComiteItem"
+                                           itemValue="#{idComiteItem}"  itemLabel="#{idComiteItem.nombreComite}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{calendarioController.update}" value="#{bundle.Save}" update="display,:CalendarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CalendarioEditDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

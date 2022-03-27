@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MatrimonioCreateDlg" widgetVar="MatrimonioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMatrimonioTitle}">
+            <h:form id="MatrimonioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{matrimonioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_folio}" for="folio" />
+                        <p:inputText id="folio" value="#{matrimonioController.selected.folio}" title="#{bundle.CreateMatrimonioTitle_folio}" />
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_codRegistro}" for="codRegistro" />
+                        <p:inputText id="codRegistro" value="#{matrimonioController.selected.codRegistro}" title="#{bundle.CreateMatrimonioTitle_codRegistro}" />
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_notaria}" for="notaria" />
+                        <p:inputText id="notaria" value="#{matrimonioController.selected.notaria}" title="#{bundle.CreateMatrimonioTitle_notaria}" />
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_fechaMatrimonioCivil}" for="fechaMatrimonioCivil" />
+                        <p:calendar id="fechaMatrimonioCivil" pattern="dd/MM/yyyy" value="#{matrimonioController.selected.fechaMatrimonioCivil}" title="#{bundle.EditMatrimonioTitle_fechaMatrimonioCivil}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_lugar}" for="lugar" />
+                        <p:inputText id="lugar" value="#{matrimonioController.selected.lugar}" title="#{bundle.CreateMatrimonioTitle_lugar}" />
+
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_fechaMatrimonioIglesia}" for="fechaMatrimonioIglesia" />
+                        <p:calendar id="fechaMatrimonioIglesia" pattern="dd/MM/yyyy" value="#{matrimonioController.selected.fechaMatrimonioIglesia}" title="#{bundle.EditMatrimonioTitle_fechaMatrimonioIglesia}"  showOn="button"/>
+                    </p:panelGrid>
+                    <br></br>
+                  <p:panelGrid columns="6" rendered="#{matrimonioController.selected != null}">
+                        <p:outputLabel value="Esposo Local:" for="esposoLocal" />
+                        <p:selectBooleanCheckbox id="esposoLocal" value="#{matrimonioController.selected.esposoExterno}" />
+                        
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_idEsposo}" for="idEsposo"  />
+                        <p:selectOneMenu style="width: 170px" id="idEsposo" value="#{matrimonioController.selected.idEsposo}">
+                            <f:selectItem itemLabel="Seleccionar .." />                               
+                            <f:selectItems value="#{personaController.list_esposo}"
+                                           var="idEsposoItem"
+                                           itemValue="#{idEsposoItem}" itemLabel="#{idEsposoItem.nombre.concat(' ').concat(idEsposoItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Nombre Esposo" for="esposoExterno" />
+                        <p:inputText id="esposoExterno" value="#{matrimonioController.selected.nombreEsposoExterno}"/>
+                        
+                        <p:outputLabel value="Esposa Local:" for="esposaLocal" />
+                        <p:selectBooleanCheckbox id="esposaLocal" value="#{matrimonioController.selected.esposaExterna}" />  
+                        
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_idEsposa}" for="idEsposa" />
+                        <p:selectOneMenu style="width: 170px" id="idEsposa" value="#{matrimonioController.selected.idEsposa}">
+                            <f:selectItem itemLabel="Seleccionar .." />                             
+                            <f:selectItems value="#{personaController.list_esposa}"
+                                           var="idEsposaItem"
+                                           itemValue="#{idEsposaItem}" itemLabel="#{idEsposaItem.nombre.concat(' ').concat(idEsposaItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="Nombre Esposa" for="esposaExterna" />
+                        <p:inputText id="esposaExterna" value="#{matrimonioController.selected.nombreEsposaExterna}"/>
+                        
+                        <p:outputLabel value="Pastor Local:" for="pastorLocal" />
+                        <p:selectBooleanCheckbox id="pastorLocal" value="#{matrimonioController.selected.pastorExterno}" />  
+                        
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_idPastor}" for="idPastor" />
+                        <p:outputLabel id="idPastor" value="#{personaController.objeto_pastor.nombre.concat(' ').concat(personaController.objeto_pastor.apellidos)}" />                       
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_otroPastor}" for="otroPastor" />
+                        <p:inputText id="otroPastor" value="#{matrimonioController.selected.otroPastor}" title="#{bundle.CreateMatrimonioTitle_otroPastor}" />
+                        <p:outputLabel value="#{bundle.CreateMatrimonioLabel_cursoPrematrimonial}" for="cursoPrematrimonial" />
+                        
+                        <p:selectBooleanCheckbox id="cursoPrematrimonial" value="#{matrimonioController.selected.cursoPrematrimonial}" />
+                        <p:outputLabel value="Observaciones" for="observaciones" />
+                        <p:inputTextarea  style="width: 170px" id="observaciones" value="#{matrimonioController.selected.observaciones}" />                        
+
+                  </p:panelGrid>
+                    <p:commandButton actionListener="#{matrimonioController.create}" value="#{bundle.Save}" update="display,:MatrimonioListForm:datalist,:growl" oncomplete="handleSubmit(args,'MatrimonioCreateDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaEditDlg" widgetVar="PersonaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonaTitle}">
+            <h:form id="PersonaEditForm">
+               <h:panelGroup id="display">
+                  <p:tabView >
+                    <p:tab title="Datos Personales" >  
+                    <p:panelGrid columns="4" rendered="#{personaController.objeto_persona != null}">
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaRegistro}" for="fechaRegistro" />
+                        <p:calendar id="fechaRegistro" pattern="MM/dd/yyyy" value="#{personaController.objeto_persona.fechaRegistro}" title="#{bundle.EditPersonaTitle_fechaRegistro}"  showOn="button"/>
+
+                        
+                        <p:outputLabel value="Tipo Documento" for="tipoDocumento" />
+                        <p:selectOneMenu id="tipoDocumento" value="#{personaController.objeto_persona.tipoDocumento}">
+                        <f:selectItem itemLabel="CC" itemValue="cédula de ciudadanía" />                            
+                        <f:selectItem itemLabel="TI" itemValue="Tarjeta de identidad" />
+                        <f:selectItem itemLabel="CE" itemValue="cédula de extranjería" />
+                        <f:selectItem itemLabel="PP" itemValue="Pasaporte" />                        
+                        </p:selectOneMenu> 
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_documentoIdentidad}" for="documentoIdentidad" />
+                        <p:inputText id="documentoIdentidad" value="#{personaController.objeto_persona.documentoIdentidad}" title="#{bundle.CreatePersonaTitle_documentoIdentidad}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{personaController.objeto_persona.nombre}" title="#{bundle.CreatePersonaTitle_nombre}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombre}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{personaController.objeto_persona.apellidos}" title="#{bundle.CreatePersonaTitle_apellidos}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_apellidos}"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_sexo}" for="sexo" />
+                        <p:selectOneMenu id="sexo" value="#{personaController.objeto_persona.sexo}">
+                        <f:selectItem itemLabel="Masculino" itemValue="Masculino" />
+                        <f:selectItem itemLabel="Femenino" itemValue="Femenino" />
+                        </p:selectOneMenu>                        
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{personaController.objeto_persona.direccion}" title="#{bundle.CreatePersonaTitle_direccion}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{personaController.objeto_persona.telefono}" title="#{bundle.CreatePersonaTitle_telefono}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_numeroCelular}" for="numeroCelular" />
+                        <p:inputText id="numeroCelular" value="#{personaController.objeto_persona.numeroCelular}" title="#{bundle.CreatePersonaTitle_numeroCelular}" />
+
+                        <p:outputLabel value="Correo electronico" for="correo" />
+                        <p:inputText id="correo" value="#{personaController.objeto_persona.correo}" />
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_estadoCivil}" for="estadoCivil" />
+                        <p:selectOneMenu id="estadoCivil" value="#{personaController.objeto_persona.estadoCivil}">
+                        <f:selectItem itemLabel="" itemValue="" />                             
+                        <f:selectItem itemLabel="Soltero(a)" itemValue="Soltero(a)" />
+                        <f:selectItem itemLabel="Casado(a)" itemValue="Casado(a)" />
+                        <f:selectItem itemLabel="Separado(a)" itemValue="Separado(a)" />
+                        <f:selectItem itemLabel="Viudo(a)" itemValue="Viudo(a)" />
+                        <f:selectItem itemLabel="Unión libre" itemValue="Unión libre" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.objeto_persona.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_bautizado}" for="bautizado" />
+                        <p:selectBooleanCheckbox disabled="true" id="bautizado" value="#{personaController.objeto_persona.bautizado}" />
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idBarrio}" for="idBarrio" />
+                        <p:selectOneMenu id="idBarrio" value="#{personaController.objeto_persona.idBarrio}" >
+                            <f:selectItem itemLabel="" itemValue="-1" />                              
+                            <f:selectItems value="#{barrioController.itemsAvailableSelectOne}"
+                                           var="idBarrioItem"
+                                           itemValue="#{idBarrioItem}" itemLabel="#{idBarrioItem.nombreBarrio}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idLugarNacimiento}" for="idLugarNacimiento" />
+                        <p:selectOneMenu id="idLugarNacimiento" value="#{personaController.objeto_persona.idLugarNacimiento}" >
+                            <f:selectItem itemLabel="" itemValue="-1" />                             
+                            <f:selectItems value="#{ciudadController.itemsAvailableSelectOne}"
+                                           var="idLugarNacimientoItem"
+                                           itemValue="#{idLugarNacimientoItem}" itemLabel="#{idLugarNacimientoItem.nombreCiudad}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_idOcupacion}" for="idOcupacion" />
+                        <p:selectOneMenu id="idOcupacion" value="#{personaController.objeto_persona.idOcupacion}" >
+                            <f:selectItem itemLabel="" itemValue="-1" />   
+                            <f:selectItems value="#{ocupacionController.itemsAvailableSelectOne}"
+                                           var="idOcupacionItem"
+                                           itemValue="#{idOcupacionItem}" itemLabel="#{idOcupacionItem.nombreOcupacion}"/>
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Nivel de estudios " for="nivelestudio" />                        
+                        <p:selectOneMenu id="nivelestudio" value="#{personaController.objeto_persona.nivelEstudio}">
+                        <f:selectItem itemLabel="" itemValue="" />                              
+                        <f:selectItem itemLabel="Primaria" itemValue="Primaria" />
+                        <f:selectItem itemLabel="Bachiller" itemValue="Bachiller" />
+                        <f:selectItem itemLabel="Tecnico" itemValue="Tecnico" />
+                        <f:selectItem itemLabel="Tecnologo" itemValue="Tecnologo" />
+                        <f:selectItem itemLabel="Universitario" itemValue="Universitario" />
+                        <f:selectItem itemLabel="postgrado" itemValue="Postgrado" />
+                        <f:selectItem itemLabel="Magister" itemValue="Magister" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="Numero de hijos" for="numerohijos" />
+                        <p:inputText id="numerohijos" value="#{personaController.objeto_persona.numeroHijos}"/>
+
+                    </p:panelGrid>
+                     </p:tab>
+                      <p:tab title="Anotaciones"> 
+                        <p:panelGrid columns="4" rendered="#{personaController.objeto_persona != null}">
+
+                        <p:outputLabel value="Influencia o trasfondo religioso" for="trasfondoReligioso" />                        
+                        <p:selectOneMenu id="trasfondoReligioso" value="#{personaController.objeto_persona.trasfondoReligioso}">
+                        <f:selectItem itemLabel="" itemValue="" />                            
+                        <f:selectItem itemLabel="Pertenece a otra iglesia cristiana" itemValue="Pertenece a otra iglesia cristiana" />
+                        <f:selectItem itemLabel="Catolico" itemValue="catolico" />
+                        <f:selectItem itemLabel="Apartado" itemValue="Apartado" />
+                        <f:selectItem itemLabel="Evangelizacion por refam" itemValue="Evangelizacion por refam" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="Cómo conocio la iglesia" for="comoLlegoIglesia" />                        
+                        <p:selectOneMenu id="comoLlegoIglesia" value="#{personaController.objeto_persona.comoLlegoIglesia}">
+                        <f:selectItem itemLabel="" itemValue="" />                            
+                        <f:selectItem itemLabel="Familiar de la ipuc" itemValue="Familiar de la ipuc" />
+                        <f:selectItem itemLabel="Por una refam" itemValue="Por una refam" />
+                        <f:selectItem itemLabel="Por las redes sociales" itemValue="Por las redes sociales" />
+                        <f:selectItem itemLabel="llegando al lugar" itemValue="llegando al lugar" />
+                         <f:selectItem itemLabel="Vista del pastor" itemValue="Vista del pastor" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="Visita primera vez" for="primeraVisita" />
+                        <p:selectBooleanCheckbox id="primeraVisita" value="#{personaController.objeto_persona.primeraVisita}" />
+                        
+                        <p:outputLabel value="Tiempo de asistencia" for="tiempoDeVisitar" />                        
+                        <p:selectOneMenu id="tiempoDeVisitar" value="#{personaController.objeto_persona.tiempoDeVisitar}">
+                        <f:selectItem itemLabel="" itemValue="" />                            
+                        <f:selectItem itemLabel="Menos 1 mes" itemValue="Menos 1 mes" />    
+                        <f:selectItem itemLabel="Hace 2 meses" itemValue="Hace 2 meses" />
+                        <f:selectItem itemLabel="Mas de 3 meses" itemValue="Mas de 3 meses" />
+                        <f:selectItem itemLabel="Hace 1 año" itemValue="Hace 1 año" />
+                         <f:selectItem itemLabel="Mas de 1 año" itemValue="Mas de 1 año" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="Participo en discipulado" for="participoDiscipulado" />
+                        <p:selectBooleanCheckbox id="participoDiscipulado" value="#{personaController.objeto_persona.participoDiscipulado}" />
+
+                        <p:outputLabel value="Lugar de discipulado" for="lugarDiscipulado" />
+                        <p:inputText id="lugarDiscipulado" value="#{personaController.objeto_persona.lugarDiscipulado}" />
+
+                        <p:outputLabel value="Desea discipulado" for="deseaDiscipulado" />
+                        <p:selectBooleanCheckbox id="deseaDiscipulado" value="#{personaController.objeto_persona.deseaDiscipulado}" />
+
+                        <p:outputLabel value="Razones de asistencia" for="razonesAsistencia" />
+                        <p:selectOneMenu id="razonesAsistencia" value="#{personaController.objeto_persona.razonesAsistencia}">
+                        <f:selectItem itemLabel="" itemValue="" />                                                    
+                        <f:selectItem itemLabel="Enseñanazas" itemValue="Enseñanazas" />    
+                        <f:selectItem itemLabel="Alabanzas" itemValue="Alabanzas" />
+                        <f:selectItem itemLabel="Ambiente espiritual" itemValue="Ambiente espiritual" />
+                        <f:selectItem itemLabel="Buena Atencion" itemValue="Buena Atencion" />
+                         <f:selectItem itemLabel="Otros Motivos" itemValue="Otros Motivos" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="Luchas espirituales" for="luchasEspirituales" />
+                        <p:selectOneMenu id="luchasEspirituales" value="#{personaController.objeto_persona.luchasEspirituales}">
+                        <f:selectItem itemLabel="" itemValue="" />                            
+                        <f:selectItem itemLabel="Familiares incoversos" itemValue="Enseñanazas" />    
+                        <f:selectItem itemLabel="Ataques espirituales" itemValue="Alabanzas" />
+                        <f:selectItem itemLabel="Otros" itemValue="Otros" />
+                        </p:selectOneMenu>                        
+
+                        <p:outputLabel value="Desea recibir informacion" for="recibirInformacion" />
+                        <p:selectBooleanCheckbox id="recibirInformacion" value="#{personaController.objeto_persona.recibirInformacion}" />                        
+                        <p:outputLabel   value="Contacto Personal" for="contacto" />
+                        <p:inputText style="width:220px" id="contacto" value="#{personaController.objeto_persona.contactovisita}"/>                        
+                        </p:panelGrid>                      
+                      </p:tab>
+                  </p:tabView>                        
+                    <p:commandButton actionListener="#{personaController.update}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonaEditDialog');"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>SAIL::: Sofware Administrativo de Iglesia Local</title>
+        <h:outputStylesheet name="css/jsfcrud.css"/>
+
+    </h:head>
+    <style>
+    body { 
+    background: url(resources/imagenes/cross-gedacd5243_1920.jpg) ;
+    background-repeat: no-repeat; 
+    background-size: 100%
+    }
+    </style>
+        <h:body>
+
+            
+                <p:growl id="growl" life="5000" autoUpdate="true" showDetail="true" escape="false"/>
+                <h:outputStylesheet library="css" name="jsfcrud.css"/>
+                <h:outputScript library="js" name="jsfcrud.js"/>
+                <h:form>  
+                    <p:dialog id="dialog" header="Iniciar sesión" footer="Olvido su contraseña" width="400" widgetVar="dlg" visible="true" closable="false" showEffect="clip" draggable="true" resizable="false" style="box-shadow: 7px 10px 5px #303030;"> 
+
+                        <p:panelGrid columns="2" style="margin: 0 auto">
+                            <h:outputLabel  value="Usuario:"/>            
+                            <h:inputText  id="username" value="#{usuarioController.usuario_sail}" required="true" requiredMessage="Ingresar usuario"  />  
+                            <h:outputLabel  value="Contraseña:"/> 
+                            <h:inputSecret  id="password" value="#{usuarioController.contrasena_sail}" required="true" requiredMessage="Ingresar contraseña"/>            
+                        </p:panelGrid>
+                        <p:commandButton icon="ui-icon-key" 
+                                         id="button" 
+                                         action="#{usuarioController.iniciaSesion()}"
+                                         value="Ingresar" style="float:right"/>            
+                    </p:dialog>
+                </h:form> 
+
+        </h:body>
+
+
+
+</html>
+

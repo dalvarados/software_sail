@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDefuncionesTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:panelGrid columns="3" cellpadding="0">
+            <h:form id="DefuncionesListForm">
+                <p:panel style="width:630px;" header="Listado de Defunciones">
+                   <br></br><br></br><br></br>
+                    <p:dataTable id="datalist" value="#{defuncionesController.items}" var="item"
+                                 selectionMode="single" selection="#{defuncionesController.selected}"
+                                 paginator="true" style="width:600px;"
+                                 rowKey="#{item.idDefunciones}" paginatorPosition="bottom"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_idPersona}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPersona.nombre.concat(' ').concat(item.idPersona.apellidos)}" />
+                        </p:column>                        
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_fechaNacimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaNacimiento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_fechaFallecimiento}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaFallecimiento}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_causa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.causa}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_lugar}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.lugar}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_fechaFuneral}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaFuneral}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDefuncionesTitle_observaciones}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.observaciones}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{defuncionesController.prepareCreate}" update=":DefuncionesCreateForm" oncomplete="PF('DefuncionesCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":DefuncionesViewForm" oncomplete="PF('DefuncionesViewDialog').show()" disabled="#{empty defuncionesController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":DefuncionesEditForm" oncomplete="PF('DefuncionesEditDialog').show()" disabled="#{empty defuncionesController.selected}"/>
+                            <p:commandButton id="deleteButton" onclick="return confirm('Esta seguro de eliminar este registro ?')" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{defuncionesController.destroy}" update=":growl,datalist" disabled="#{empty defuncionesController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+               </p:panel>
+            </h:form>
+            <p:spacer width="50" height="510"> </p:spacer>
+            <h:graphicImage  library="imagenes"  style="width: 600px; height: 400px;" name="chapinero2.png"/> 
+            </h:panelGrid>
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>
