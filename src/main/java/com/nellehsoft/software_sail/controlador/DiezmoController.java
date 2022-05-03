@@ -49,6 +49,7 @@ public class DiezmoController implements Serializable {
     private List<Diezmo> items = null;
     private Diezmo selected;
     private double calculoFondoLocal;
+    private Persona objeto_pastor; 
     private List<CuentasPuc> list_cuenta_diezmo =new ArrayList(); 
     private List<CuentasPuc> list_cuenta_ingreso_diezmos;
     private List<CuentasPuc> list_cuenta_ingreso_fondo;     
@@ -70,11 +71,28 @@ public class DiezmoController implements Serializable {
     private CuentasPuc cuentaAportePastor;
     private CuentasPuc cuentaIngresoDiezmo;
     private CuentasPuc cuentaIngresoFondoDiezmo;
+    private List<Persona> list_persona_ordenada;    
     private int valNumeroIngreso=0;
     private  int valNumeroEgresoPastor=0;
     private  int valNumeroEgresoCorpenteUnida=0;    
     
     public DiezmoController() {
+    }
+
+    public List<Persona> getList_persona_ordenada() {
+        return list_persona_ordenada;
+    }
+
+    public void setList_persona_ordenada(List<Persona> list_persona_ordenada) {
+        this.list_persona_ordenada = list_persona_ordenada;
+    }
+
+    public Persona getObjeto_pastor() {
+        return objeto_pastor;
+    }
+
+    public void setObjeto_pastor(Persona objeto_pastor) {
+        this.objeto_pastor = objeto_pastor;
     }
 
     public int getValNumeroIngreso() {
@@ -292,13 +310,23 @@ public class DiezmoController implements Serializable {
         tipoIngreso =new TipoContable();
         cuenta_activo_caja=new CuentasPuc();
         iglesia =new Iglesia();    
-        ciudad=new Ciudad();                  
+        ciudad=new Ciudad();
+        obtener_pastor();
+        obtener_lista_persona_ordenada();
         obtener_tipoIglesia();
         obtener_tercero_corpenteunida();
         obtener_tipoContable();
         obtener_tipoContableEgreso();
         initializeEmbeddableKey();
         return selected;
+    }
+
+   public void obtener_lista_persona_ordenada(){
+    list_persona_ordenada=ejbFacadePersona.obtener_persona_sort();
+   }
+   
+    public void obtener_pastor(){
+      objeto_pastor=ejbFacadePersona.obtener_pastor();
     }
     
     public void liquidarDiezmos(){

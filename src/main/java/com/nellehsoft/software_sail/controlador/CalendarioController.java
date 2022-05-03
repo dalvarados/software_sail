@@ -7,6 +7,10 @@ import com.nellehsoft.software_sail.negocio.CalendarioFacade;
 import com.nellehsoft.software_sail.persistencia.Usuario;
 import java.util.Date;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -41,7 +45,9 @@ public class CalendarioController implements Serializable {
     private ScheduleModel eventModel;
     private Calendario calendario;
     private Usuario userRol;
-    private String tipo; 
+    private String tipo;
+//    private String horaInicio;
+//    private String horaFin;    
     private List<Calendario> list_tipo= null;
 
     public CalendarioController() {
@@ -53,9 +59,33 @@ public class CalendarioController implements Serializable {
      rpta= FacesContext.getCurrentInstance().isPostback();
      return rpta;
     }
-                    
+
+//    public String getHoraInicio() {
+//        return horaInicio;
+//    }
+//
+//    public void setHoraInicio(String horaInicio) {
+//        this.horaInicio = horaInicio;
+//    }
+//
+//    public String getHoraFin() {
+//        return horaFin;
+//    }
+//
+//    public void setHoraFin(String horaFin) {
+//        this.horaFin = horaFin;
+//    }
+
+ 
+ 
+    
    public void inicializarCalendario(){
      if (isPostback() == false) {
+         cargarCalendario();  
+      }        
+   }
+   
+   public void cargarCalendario(){
        calendario=new Calendario();
        eventModel=new DefaultScheduleModel();   
        items = getFacade().obtener_calendarioRol(userRol.getIdRol().getIdRol());
@@ -69,9 +99,8 @@ public class CalendarioController implements Serializable {
            evt.setAllDay(false);
            evt.setEditable(true);
            eventModel.addEvent(evt);
-       }  
-      }        
-   }
+       }
+    }
    
     public Usuario getUserRol() {
         return userRol;
@@ -282,19 +311,35 @@ public class CalendarioController implements Serializable {
        calendario.setFechaFin(new java.sql.Date(event.getEndDate().getTime()));
 }
       
-      public void guardarCalendario(){
+      public void guardarCalendario() throws ParseException{
         if(calendario.getIdCalendario()==null){
             int resultFecha = calendario.getFechaInicio().compareTo(calendario.getFechaFin());
-              if( resultFecha<=0) {
-                  calendario.setIdRol(userRol.getIdRol());
+              if( resultFecha<=0) {                  
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+                String strDate = dateFormat.format(calendario.getFechaInicio());
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = formatter.parse(strDate);
+                java.sql.Timestamp fechaInicioHora = new Timestamp(date.getTime());                  
+                calendario.setFechaInicio(fechaInicioHora);
+                
+                DateFormat dateFormatFin = new SimpleDateFormat("yyyy-MM-dd");  
+                String strDateFin = dateFormatFin.format(calendario.getFechaFin());
+                SimpleDateFormat formatterFin = new SimpleDateFormat("yyyy-MM-dd");
+                Date dateFin = formatterFin.parse(strDateFin);
+                java.sql.Timestamp fechaFinHora = new Timestamp(dateFin.getTime());                               
+                calendario.setFechaFin(fechaFinHora);
+                
+                   calendario.setIdRol(userRol.getIdRol());
                    getFacade().create(calendario);
                    inicializarCalendario();
+                   cargarCalendario();                     
               }else{
               mensajeFaces("Alerta: Fecha inicio menor a la fecha fin",FacesMessage.SEVERITY_WARN);
               }
           }else{
            getFacade().edit(calendario);
-           inicializarCalendario();              
+           inicializarCalendario(); 
+           cargarCalendario();
           }
       }
       
