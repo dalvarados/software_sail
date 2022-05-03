@@ -44,17 +44,13 @@
                   <p:panelGrid  columns="4" rendered="#{diezmoController.selected != null}">
                       <p:outputLabel value="#{bundle.CreateDiezmoLabel_idResponsablePpal}" for="idResponsablePpal" />
                         <p:selectOneMenu style="width: 170px" id="idResponsablePpal" value="#{diezmoController.selected.idResponsablePpal}" >
-                            <f:selectItems value="#{personaController.list_persona_ordenada}"
+                            <f:selectItems value="#{diezmoController.list_persona_ordenada}"
                                            var="idResponsablePpalItem"
                                            itemValue="#{idResponsablePpalItem}" itemLabel="#{idResponsablePpalItem.nombre.concat(' ').concat(idResponsablePpalItem.apellidos)}"/>
                         </p:selectOneMenu>                        
 
-                      <p:outputLabel value="#{bundle.CreateDiezmoLabel_idPersona}" for="idPersona" />
-                        <p:selectOneMenu  style="width: 170px" id="idPersona" value="#{diezmoController.selected.idPersona}" >
-                            <f:selectItems value="#{personaController.list_pastor}"
-                                           var="idPersonaItem"
-                                           itemValue="#{idPersonaItem}" itemLabel="#{idPersonaItem.nombre.concat(' ').concat(idPersonaItem.apellidos)}"/>
-                        </p:selectOneMenu>                                                
+                      <p:outputLabel for="pastor" value="#{bundle.CreateDiezmoLabel_idPersona}" />
+                      <p:outputLabel  id="pastor" value="#{diezmoController.objeto_pastor.nombre.concat(' ').concat(diezmoController.objeto_pastor.apellidos)}" />                                             
                   </p:panelGrid>
                      <p:commandButton actionListener="#{diezmoController.create}" value="#{bundle.Save}" update="display,:DiezmoListForm:datalist,:growl" />
                      <p:commandButton value="Cerrar" immediate="true" oncomplete="handleSubmit(args,'DiezmoCreateDialog');"/>

@@ -57,10 +57,10 @@ public class Calendario implements Serializable {
     @Column(name = "titulo_evento")
     private String tituloEvento;
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date fechaFin;
     @Size(max = 250)
     @Column(name = "descripcion_evento")
@@ -75,7 +75,13 @@ public class Calendario implements Serializable {
     private String lugar;
     @Size(max = 45)
     @Column(name = "tipo")
-    private String tipo;    
+    private String tipo;
+    @Size(max = 45)
+    @Column(name = "hora_inicio")
+    private String horaInicio;    
+    @Size(max = 45)
+    @Column(name = "hora_fin")
+    private String horaFin;    
     @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     @ManyToOne(optional = false)
     private Rol idRol; 
@@ -83,6 +89,22 @@ public class Calendario implements Serializable {
     private Integer documentoIdentidad;
     
     public Calendario() {
+    }
+
+    public String getHoraInicio() {
+        return horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public String getHoraFin() {
+        return horaFin;
+    }
+
+    public void setHoraFin(String horaFin) {
+        this.horaFin = horaFin;
     }
 
     public boolean isEstadoEvento() {
