@@ -153,8 +153,9 @@
                         </p:column>                    
                  </p:dataTable>
                        <f:facet name="footer">
-                    <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}"  update="AsientoContableEditDetalleForm1" oncomplete="PF('AsientoContableEditDetalleDialog1').show()" disabled="#{empty asientoContableController.selectedDetalle}" />
-                    <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('Esta seguro de eliminar este registro ?')"  actionListener="#{asientoContableController.destroyDocumentoContable}" disabled="#{empty asientoContableController.selectedDetalle}" update="display,:AsientoContableEgresoListForm:datalist datalistCreateAsientos,:growl"/>                                              
+                <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}"  update="AsientoContableEditDetalleForm" oncomplete="PF('AsientoContableEditDetalleDialog1').show()" disabled="#{empty asientoContableController.selectedDetalle}" />
+                <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" onclick="return confirm('Esta seguro de eliminar este registro ?')"  actionListener="#{asientoContableController.destroyDocumentoContable}" 
+                                 disabled="#{empty asientoContableController.selectedDetalle}" update="display,:AsientoContableEgresoListForm:datalist datalistCreateAsientos,:growl"/>                                              
                         </f:facet> 
                     </p:panelGrid>                                    
                 </h:panelGroup>

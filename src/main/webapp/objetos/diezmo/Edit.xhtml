@@ -46,12 +46,8 @@
                                            itemValue="#{idResponsablePpalItem}" itemLabel="#{idResponsablePpalItem.nombre.concat(' ').concat(idResponsablePpalItem.apellidos)}"/>
                         </p:selectOneMenu>                        
 
-                      <p:outputLabel value="#{bundle.CreateDiezmoLabel_idPersona}" for="idPersona" />
-                        <p:selectOneMenu  style="width: 170px" id="idPersona" value="#{diezmoController.selected.idPersona}" >
-                            <f:selectItems value="#{personaController.list_pastor}"
-                                           var="idPersonaItem"
-                                           itemValue="#{idPersonaItem}" itemLabel="#{idPersonaItem.nombre.concat(' ').concat(idPersonaItem.apellidos)}"/>
-                        </p:selectOneMenu>                                                
+                      <p:outputLabel for="pastor" value="#{bundle.CreateDiezmoLabel_idPersona}" />
+                      <p:outputLabel  id="pastor" value="#{diezmoController.objeto_pastor.nombre.concat(' ').concat(diezmoController.objeto_pastor.apellidos)}" />                                                                                            
                   </p:panelGrid>
                     <p:commandButton actionListener="#{diezmoController.update}" value="#{bundle.Save}" update="display,:DiezmoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'DiezmoEditDialog');"/>
                     <p:commandButton value="Cerrar" immediate="true" oncomplete="handleSubmit(args,'DiezmoEditDialog');"/>   
